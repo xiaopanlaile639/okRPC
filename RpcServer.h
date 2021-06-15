@@ -1,22 +1,11 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
-// http://code.google.com/p/muduo/
-//
-// Use of this source code is governed by a BSD-style license
-// that can be found in the License file.
-
-// Author: Shuo Chen (chenshuo at chenshuo dot com)
-//
-// This is a public header file, it must only include public header files.
-
 #ifndef MUDUO_PROTORPC2_RPCSERVER_H
 #define MUDUO_PROTORPC2_RPCSERVER_H
 
 #include <muduo/net/TcpServer.h>
-#include <RpcService.h>
+
+#include "RpcService.h"
 
 using namespace muduo::net;
-
-
 
 class Service;
 

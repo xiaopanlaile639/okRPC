@@ -1,6 +1,3 @@
-
-
-
 #include <muduo/base/Logging.h>
 #include <google/protobuf/descriptor.h>
 #include <muduo/net/TcpConnection.h>
@@ -8,6 +5,7 @@
 #include "RpcServer.h"
 #include "RpcChannel.h"
 #include "service.h"
+#include "RpcChannel.h"
 
 
 using namespace muduo;

@@ -1,19 +1,5 @@
-// Copyright 2010, Shuo Chen.  All rights reserved.
-// http://code.google.com/p/muduo/
-//
-// Use of this source code is governed by a BSD-style license
-// that can be found in the License file.
-
-// Author: Shuo Chen (chenshuo at chenshuo dot com)
-//
-// This is a public header file, it must only include public header files.
-
 #ifndef MUDUO_PROTORPC2_RPCCHANNEL_H
 #define MUDUO_PROTORPC2_RPCCHANNEL_H
-
-#include <muduo/base/Atomic.h>
-#include <muduo/base/Mutex.h>
-#include <muduo/net/protorpc/RpcCodec.h>
 
 #include <google/protobuf/stubs/common.h> // implicit_cast, down_cast
 #if GOOGLE_PROTOBUF_VERSION >= 3000000
@@ -21,9 +7,15 @@
 #endif
 
 #include <map>
+ 
+#include <muduo/base/Atomic.h>
+#include <muduo/base/Mutex.h>
+
+#include <muduo/net/TcpConnection.h>
+#include <muduo/net/Callbacks.h>
 
 #include "RpcService.h"
-
+#include "RpcCodec.h"
 
 namespace google
 {
@@ -79,8 +71,8 @@ namespace google
 
  
 
-// using namespace muduo;
-// using namespace muduo::net;
+using namespace muduo;
+using namespace muduo::net;
 
 namespace okrpc
 {
@@ -116,33 +108,41 @@ namespace okrpc
       services_ = services;
     }
 
-    typedef ::std::function<void(const ::google::protobuf::MessagePtr &)> ClientDoneCallback;
+    
+    void CallMethod(const ::google::protobuf::MethodDescriptor* method,
+                  ::google::protobuf::RpcController* controller,
+                  const ::google::protobuf::Message* request,
+                  ::google::protobuf::Message* response,
+                  ::google::protobuf::Closure* done) override;
+    
+    
+   // typedef ::std::function<void(const ::google::protobuf::MessagePtr &)> ClientDoneCallback;
 
     // Call the given method of the remote service.  The signature of this
     // procedure looks the same as Service::CallMethod(), but the requirements
     // are less strict in one important way:  the request and response objects
     // need not be of any specific class as long as their descriptors are
     // method->input_type() and method->output_type().
-    void CallMethod(const ::google::protobuf::MethodDescriptor *method,
-                    const ::google::protobuf::Message &request,
-                    const ::google::protobuf::Message *response,
-                    const ClientDoneCallback &done);
+    // void CallMethod(const ::google::protobuf::MethodDescriptor *method,
+    //                 const ::google::protobuf::Message &request,
+    //                 const ::google::protobuf::Message *response,
+    //                 const ClientDoneCallback &done);
 
-    template <typename Output>
-    static void downcastcall(const ::std::function<void(const std::shared_ptr<Output> &)> &done,
-                             const ::google::protobuf::MessagePtr &output)
-    {
-      done(::google::protobuf::down_pointer_cast<Output>(output));
-    }
+    // template <typename Output>
+    // static void downcastcall(const ::std::function<void(const std::shared_ptr<Output> &)> &done,
+    //                          const ::google::protobuf::MessagePtr &output)
+    // {
+    //   done(::google::protobuf::down_pointer_cast<Output>(output));
+    // }
 
-    template <typename Output>
-    void CallMethod(const ::google::protobuf::MethodDescriptor *method,
-                    const ::google::protobuf::Message &request,
-                    const Output *response,
-                    const ::std::function<void(const std::shared_ptr<Output> &)> &done)
-    {
-      CallMethod(method, request, response, std::bind(&downcastcall<Output>, done, _1));
-    }
+    // template <typename Output>
+    // void CallMethod(const ::google::protobuf::MethodDescriptor *method,
+    //                 const ::google::protobuf::Message &request,
+    //                 const Output *response,
+    //                 const ::std::function<void(const std::shared_ptr<Output> &)> &done)
+    // {
+    //   CallMethod(method, request, response, std::bind(&downcastcall<Output>, done, _1));
+    // }
 
     void onDisconnect();
 
@@ -156,14 +156,14 @@ namespace okrpc
                       Timestamp receiveTime);
 
     void callServiceMethod(const RpcMessage &message);
-    void doneCallback(const ::google::protobuf::Message *responsePrototype,
-                      const ::google::protobuf::Message *response,
-                      int64_t id);
+    
+    //发送完数据之后的回调函数
+    void doneCallback(::google::protobuf::Message* response, int64_t id);
 
     struct OutstandingCall
     {
-      const ::google::protobuf::Message *response;
-      ClientDoneCallback done;
+      ::google::protobuf::Message* response;
+      ::google::protobuf::Closure* done;
     };
 
     RpcCodec codec_;

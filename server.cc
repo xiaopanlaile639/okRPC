@@ -6,7 +6,7 @@
 
 
 #include "sudoku.pb.h"
-#include "../RpcServer.h"
+#include "RpcServer.h"
 
 using namespace muduo;
 using namespace muduo::net;

@@ -16,10 +16,37 @@ using namespace muduo;
 using namespace muduo::net;
 using namespace okrpc;
 
+
+
+//Q:为什么需要定义在这？
+namespace okrpc
+{
+const char rpctag [] = "RPC0";
+}
+
+//////////////////utilities///////////////////////////
+// template<typename T>
+// inline T* get_pointer(const std::shared_ptr<T>& ptr)
+// {
+//   return ptr.get();
+// }
+
+// template<typename T>
+// inline T* get_pointer(const std::unique_ptr<T>& ptr)
+// {
+//   return ptr.get();
+// }
+
+
+//////////////////////////////////////////////////
+
+
 static int test_down_pointer_cast()
 {
-  ::std::shared_ptr<::google::protobuf::Message> msg(new RpcMessage);
-  ::std::shared_ptr<RpcMessage> rpc(::google::protobuf::down_pointer_cast<RpcMessage>(msg));
+  //Q:为什么外部已经引用了okrpc，这里RpcMessage还需要加上域作用符号
+
+  ::std::shared_ptr<::google::protobuf::Message> msg(new okrpc::RpcMessage);
+  ::std::shared_ptr<okrpc::RpcMessage> rpc(::google::protobuf::down_pointer_cast<okrpc::RpcMessage>(msg));
   assert(msg && rpc);
   if (!rpc)
   {
@@ -50,32 +77,57 @@ RpcChannel::~RpcChannel()
   LOG_INFO << "RpcChannel::dtor - " << this;
 }
 
-// Call the given method of the remote service.  The signature of this
-// procedure looks the same as Service::CallMethod(), but the requirements
-// are less strict in one important way:  the request and response objects
-// need not be of any specific class as long as their descriptors are
-// method->input_type() and method->output_type().
-void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor *method,
-                            const ::google::protobuf::Message &request,
-                            const ::google::protobuf::Message *response,
-                            const ClientDoneCallback &done)
+
+
+void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor* method,
+                            google::protobuf::RpcController* controller,
+                            const ::google::protobuf::Message* request,
+                            ::google::protobuf::Message* response,
+                            ::google::protobuf::Closure* done)
 {
-  // FIXME: can we move serialization to IO thread?
   RpcMessage message;
   message.set_type(REQUEST);
   int64_t id = id_.incrementAndGet();
   message.set_id(id);
   message.set_service(method->service()->full_name());
   message.set_method(method->name());
-  message.set_request(request.SerializeAsString()); // FIXME: error check
+  message.set_request(request->SerializeAsString()); // FIXME: error check
 
-  OutstandingCall out = {response, done};
+  OutstandingCall out = { response, done };
   {
-    MutexLockGuard lock(mutex_);
-    outstandings_[id] = out;
+  MutexLockGuard lock(mutex_);
+  outstandings_[id] = out;
   }
   codec_.send(conn_, message);
 }
+
+
+// // Call the given method of the remote service.  The signature of this
+// // procedure looks the same as Service::CallMethod(), but the requirements
+// // are less strict in one important way:  the request and response objects
+// // need not be of any specific class as long as their descriptors are
+// // method->input_type() and method->output_type().
+// void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor *method,
+//                             const ::google::protobuf::Message &request,
+//                             const ::google::protobuf::Message *response,
+//                             const ClientDoneCallback &done)
+// {
+//   // FIXME: can we move serialization to IO thread?
+//   okrpc::RpcMessage message;
+//   message.set_type(REQUEST);
+//   int64_t id = id_.incrementAndGet();
+//   message.set_id(id);
+//   message.set_service(method->service()->full_name());
+//   message.set_method(method->name());
+//   message.set_request(request.SerializeAsString()); // FIXME: error check
+
+//   OutstandingCall out = {response, done};
+//   {
+//     MutexLockGuard lock(mutex_);
+//     outstandings_[id] = out;
+//   }
+//   codec_.send(conn_, message);
+// }
 
 void RpcChannel::onDisconnect()
 {
@@ -97,6 +149,7 @@ void RpcChannel::onRpcMessage(const TcpConnectionPtr &conn,
   assert(conn == conn_);
   //printf("%s\n", message.DebugString().c_str());
   RpcMessage &message = *messagePtr;
+
   LOG_TRACE << "RpcChannel::onRpcMessage " << message.DebugString();
   
   if (message.type() == RESPONSE)       //回复消息
@@ -141,7 +194,7 @@ void RpcChannel::onRpcMessage(const TcpConnectionPtr &conn,
       response->ParseFromString(message.response());
       if (out.done)
       {
-        out.done(response);
+        out.done->Run();  //(response);
       }
     }
     else
@@ -177,7 +230,9 @@ void RpcChannel::callServiceMethod(const RpcMessage &message)
       {
         // FIXME: can we move deserialization to other thread?
         //const
-        ::google::protobuf::MessagePtr request(service->GetRequestPrototype(method).New());
+        //::google::protobuf::MessagePtr request(service->GetRequestPrototype(method).New());
+         std::unique_ptr<google::protobuf::Message> request(service->GetRequestPrototype(method).New());
+
         request->ParseFromString(message.request());
         int64_t id = message.id();
         //const ::google::protobuf::Message *responsePrototype = &service->GetResponsePrototype(method);
@@ -187,8 +242,10 @@ void RpcChannel::callServiceMethod(const RpcMessage &message)
         //                     std::bind(&RpcChannel::doneCallback, this, responsePrototype, _1, id));
 
         //fixit: 第三个参数传递智能指针
-        service->CallMethod(method,nullptr,request.get(),response, 
-                          std::bind(&RpcChannel::doneCallback, this, response, _1, id));
+        service->CallMethod(method,nullptr,get_pointer(request),response, 
+                          NewCallback(this, &RpcChannel::doneCallback, response, id));
+                          //std::bind(&RpcChannel::doneCallback, this, response, _1, id))
+                          
       }
       else
       {
@@ -209,13 +266,11 @@ void RpcChannel::callServiceMethod(const RpcMessage &message)
 
 
 //调用完服务函数之后，最后需要完成的步骤
-void RpcChannel::doneCallback(const ::google::protobuf::Message *responsePrototype,
-                              const ::google::protobuf::Message *response,
-                              int64_t id)
+void RpcChannel::doneCallback(::google::protobuf::Message* response, int64_t id)
 {
   // FIXME: can we move serialization to IO thread?
-  assert(response->GetDescriptor() == responsePrototype->GetDescriptor());
-  RpcMessage message;
+  std::unique_ptr<google::protobuf::Message> d(response);
+  okrpc::RpcMessage message;
   message.set_type(RESPONSE);
   message.set_id(id);
   message.set_response(response->SerializeAsString()); // FIXME: error check
