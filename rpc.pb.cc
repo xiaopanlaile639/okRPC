@@ -18,7 +18,7 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
-
+//
 namespace okrpc {
 class RpcMessageDefaultTypeInternal {
  public:

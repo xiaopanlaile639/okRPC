@@ -4,8 +4,7 @@
 #include <muduo/net/EventLoop.h>
 #include <muduo/net/protorpc/RpcServer.h>
 
-
-#include "sudoku.pb.h"
+#include "../sudoku.pb.h"
 #include "../RpcServer.h"
 
 using namespace muduo;
@@ -33,6 +32,8 @@ class SudokuServiceImpl : public SudokuService
 
 int main()
 {
+  muduo::Logger::setLogLevel(muduo::Logger::TRACE );
+  
   LOG_INFO << "pid = " << getpid();
   
   EventLoop loop;

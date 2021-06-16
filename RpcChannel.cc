@@ -190,8 +190,14 @@ void RpcChannel::onRpcMessage(const TcpConnectionPtr &conn,
     if (out.response)
     {
       // FIXME: can we move deserialization to other thread?
-      ::google::protobuf::MessagePtr response(out.response->New());
-      response->ParseFromString(message.response());
+
+      //Q:这个地方有错误？
+      //A:不应该重新新建一个response
+      
+      //::google::protobuf::MessagePtr response(out.response->New());
+       //response->ParseFromString(message.response());
+      out.response->ParseFromString(message.response());
+     
       if (out.done)
       {
         out.done->Run();  //(response);

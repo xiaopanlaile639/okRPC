@@ -5,8 +5,8 @@
 #include <muduo/net/TcpConnection.h>
 #include <muduo/net/protorpc/RpcChannel.h>
 
-
-#include "../server/sudoku.pb.h"
+//#include <m>
+#include "../sudoku.pb.h"
 #include "../RpcChannel.h"
 
 #include <stdio.h>
@@ -14,6 +14,7 @@
 
 using namespace muduo;
 using namespace muduo::net;
+using namespace okrpc;
 
 class RpcClient 
 {
@@ -21,13 +22,13 @@ class RpcClient
   RpcClient(EventLoop* loop, const InetAddress& serverAddr)
     : loop_(loop),
       client_(loop, serverAddr, "RpcClient"),
-      channel_(new RpcChannel),
+      channel_(new okrpc::RpcChannel),
       stub_(get_pointer(channel_))
   {
     client_.setConnectionCallback(
         std::bind(&RpcClient::onConnection, this, _1));
     client_.setMessageCallback(
-        std::bind(&RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
+        std::bind(&okrpc::RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
     // client_.enableRetry();
   }
 
@@ -57,7 +58,7 @@ class RpcClient
 
   void solved(sudoku::SudokuResponse* resp)
   {
-    LOG_INFO << "solved:\n" << resp->DebugString();
+    LOG_INFO << "solved:\n" << resp->DebugString();     //？？？未输出答案
     client_.disconnect();
   }
 
@@ -69,6 +70,7 @@ class RpcClient
 
 int main(int argc, char* argv[])
 {
+    muduo::Logger::setLogLevel(muduo::Logger::TRACE );
   LOG_INFO << "pid = " << getpid();
   if (argc > 1)
   {
