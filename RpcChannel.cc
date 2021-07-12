@@ -10,7 +10,6 @@
 
 #include "rpc.pb.h"
 #include "RpcChannel.h"
-#include "service.h"
 
 using namespace muduo;
 using namespace muduo::net;
@@ -101,33 +100,6 @@ void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor* method,
   codec_.send(conn_, message);
 }
 
-
-// // Call the given method of the remote service.  The signature of this
-// // procedure looks the same as Service::CallMethod(), but the requirements
-// // are less strict in one important way:  the request and response objects
-// // need not be of any specific class as long as their descriptors are
-// // method->input_type() and method->output_type().
-// void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor *method,
-//                             const ::google::protobuf::Message &request,
-//                             const ::google::protobuf::Message *response,
-//                             const ClientDoneCallback &done)
-// {
-//   // FIXME: can we move serialization to IO thread?
-//   okrpc::RpcMessage message;
-//   message.set_type(REQUEST);
-//   int64_t id = id_.incrementAndGet();
-//   message.set_id(id);
-//   message.set_service(method->service()->full_name());
-//   message.set_method(method->name());
-//   message.set_request(request.SerializeAsString()); // FIXME: error check
-
-//   OutstandingCall out = {response, done};
-//   {
-//     MutexLockGuard lock(mutex_);
-//     outstandings_[id] = out;
-//   }
-//   codec_.send(conn_, message);
-// }
 
 void RpcChannel::onDisconnect()
 {

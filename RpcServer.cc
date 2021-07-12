@@ -4,9 +4,6 @@
 
 #include "RpcServer.h"
 #include "RpcChannel.h"
-#include "service.h"
-#include "RpcChannel.h"
-
 
 using namespace muduo;
 using namespace muduo::net;
