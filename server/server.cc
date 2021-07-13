@@ -4,14 +4,15 @@
 #include <muduo/net/EventLoop.h>
 #include <muduo/net/protorpc/RpcServer.h>
 
-#include "../sudoku.pb.h"
+#include "../proto/sudoku.pb.h"
 #include "../RpcServer.h"
+#include "../proto/heartBeat.pb.h"
 
 using namespace muduo;
 using namespace muduo::net;
+using namespace heartBeat;
+using namespace sudoku;
 
-namespace sudoku
-{
 
 class SudokuServiceImpl : public SudokuService
 {
@@ -28,22 +29,43 @@ class SudokuServiceImpl : public SudokuService
   }
 };
 
-}  // namespace sudoku
+
+class HeartBeatServiceImpl: public HeartBeatService
+{
+public:
+    virtual void HeartBeat(::google::protobuf::RpcController* controller,
+                        const ::heartBeat::HeartBeatRequest* request,
+                        ::heartBeat::HeartBeatResponse* response,
+                        ::google::protobuf::Closure* done)
+    {
+        LOG_INFO << "HeartBeatServiceImpl::HeartBeat, receive heartbeat msg: "<< request->heartbeartreq();
+      
+        response->set_heartbeartrsp("receive heart beat");
+        done->Run();
+    }
+
+};
+
 
 int main()
 {
-  muduo::Logger::setLogLevel(muduo::Logger::TRACE );
-  
-  LOG_INFO << "pid = " << getpid();
-  
-  EventLoop loop;
-  InetAddress listenAddr(9981);
-  sudoku::SudokuServiceImpl impl;
+    muduo::Logger::setLogLevel(muduo::Logger::TRACE );
+    
+    LOG_INFO << "pid = " << getpid();
+    
+    EventLoop loop;
+    InetAddress listenAddr(9981);
+    SudokuServiceImpl impl;
 
-  okrpc::RpcServer server(&loop, listenAddr);
-  server.registerService(&impl);
-  server.start();
-  loop.loop();
-  google::protobuf::ShutdownProtobufLibrary();
+    HeartBeatServiceImpl impl1;
+
+    okrpc::RpcServer server(&loop, listenAddr);
+  
+    server.registerService(&impl);
+    server.registerService(&impl1);
+
+    server.start();
+    loop.loop();
+    google::protobuf::ShutdownProtobufLibrary();
 }
 

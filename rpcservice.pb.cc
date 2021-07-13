@@ -5,240 +5,205 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/extension_set.h>
+#include <google/protobuf/wire_format_lite.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
 // @@protoc_insertion_point(includes)
-
+#include <google/protobuf/port_def.inc>
 namespace okrpc {
 class ListRpcRequestDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ListRpcRequest>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ListRpcRequest> _instance;
 } _ListRpcRequest_default_instance_;
 class ListRpcResponseDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ListRpcResponse>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ListRpcResponse> _instance;
 } _ListRpcResponse_default_instance_;
 class GetServiceRequestDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<GetServiceRequest>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GetServiceRequest> _instance;
 } _GetServiceRequest_default_instance_;
 class GetServiceResponseDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<GetServiceResponse>
-      _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GetServiceResponse> _instance;
 } _GetServiceResponse_default_instance_;
 }  // namespace okrpc
-namespace protobuf_rpcservice_2eproto {
-static void InitDefaultsListRpcRequest() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::okrpc::_ListRpcRequest_default_instance_;
-    new (ptr) ::okrpc::ListRpcRequest();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::okrpc::ListRpcRequest::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_ListRpcRequest =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsListRpcRequest}, {}};
-
-static void InitDefaultsListRpcResponse() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::okrpc::_ListRpcResponse_default_instance_;
-    new (ptr) ::okrpc::ListRpcResponse();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::okrpc::ListRpcResponse::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_ListRpcResponse =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsListRpcResponse}, {}};
-
-static void InitDefaultsGetServiceRequest() {
+static void InitDefaultsscc_info_GetServiceRequest_rpcservice_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::okrpc::_GetServiceRequest_default_instance_;
     new (ptr) ::okrpc::GetServiceRequest();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::okrpc::GetServiceRequest::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_GetServiceRequest =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsGetServiceRequest}, {}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GetServiceRequest_rpcservice_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GetServiceRequest_rpcservice_2eproto}, {}};
 
-static void InitDefaultsGetServiceResponse() {
+static void InitDefaultsscc_info_GetServiceResponse_rpcservice_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::okrpc::_GetServiceResponse_default_instance_;
     new (ptr) ::okrpc::GetServiceResponse();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::okrpc::GetServiceResponse::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_GetServiceResponse =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsGetServiceResponse}, {}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GetServiceResponse_rpcservice_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GetServiceResponse_rpcservice_2eproto}, {}};
 
-void InitDefaults() {
-  ::google::protobuf::internal::InitSCC(&scc_info_ListRpcRequest.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ListRpcResponse.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_GetServiceRequest.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_GetServiceResponse.base);
+static void InitDefaultsscc_info_ListRpcRequest_rpcservice_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::okrpc::_ListRpcRequest_default_instance_;
+    new (ptr) ::okrpc::ListRpcRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::okrpc::ListRpcRequest::InitAsDefaultInstance();
 }
 
-::google::protobuf::Metadata file_level_metadata[4];
-const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors[1];
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ListRpcRequest_rpcservice_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ListRpcRequest_rpcservice_2eproto}, {}};
 
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static void InitDefaultsscc_info_ListRpcResponse_rpcservice_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::okrpc::_ListRpcResponse_default_instance_;
+    new (ptr) ::okrpc::ListRpcResponse();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::okrpc::ListRpcResponse::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ListRpcResponse_rpcservice_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ListRpcResponse_rpcservice_2eproto}, {}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_rpcservice_2eproto[4];
+static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_rpcservice_2eproto = nullptr;
+static const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* file_level_service_descriptors_rpcservice_2eproto[1];
+
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_rpcservice_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::ListRpcRequest, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::ListRpcRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::ListRpcRequest, service_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::ListRpcRequest, list_method_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::ListRpcRequest, service_name_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::ListRpcRequest, list_method_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::ListRpcResponse, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::ListRpcResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::ListRpcResponse, error_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::ListRpcResponse, service_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::ListRpcResponse, method_name_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::ListRpcResponse, error_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::ListRpcResponse, service_name_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::ListRpcResponse, method_name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::GetServiceRequest, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::GetServiceRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::GetServiceRequest, service_name_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::GetServiceRequest, service_name_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::GetServiceResponse, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::GetServiceResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::GetServiceResponse, error_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::GetServiceResponse, proto_file_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::okrpc::GetServiceResponse, proto_file_name_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::GetServiceResponse, error_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::GetServiceResponse, proto_file_),
+  PROTOBUF_FIELD_OFFSET(::okrpc::GetServiceResponse, proto_file_name_),
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::okrpc::ListRpcRequest)},
   { 7, -1, sizeof(::okrpc::ListRpcResponse)},
   { 15, -1, sizeof(::okrpc::GetServiceRequest)},
   { 21, -1, sizeof(::okrpc::GetServiceResponse)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::okrpc::_ListRpcRequest_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::okrpc::_ListRpcResponse_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::okrpc::_GetServiceRequest_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::okrpc::_GetServiceResponse_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::okrpc::_ListRpcRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::okrpc::_ListRpcResponse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::okrpc::_GetServiceRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::okrpc::_GetServiceResponse_default_instance_),
 };
 
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  AssignDescriptors(
-      "rpcservice.proto", schemas, file_default_instances, TableStruct::offsets,
-      file_level_metadata, NULL, file_level_service_descriptors);
-}
+const char descriptor_table_protodef_rpcservice_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+  "\n\020rpcservice.proto\022\005okrpc\032 google/protob"
+  "uf/descriptor.proto\032\trpc.proto\";\n\016ListRp"
+  "cRequest\022\024\n\014service_name\030\001 \001(\t\022\023\n\013list_m"
+  "ethod\030\002 \001(\010\"]\n\017ListRpcResponse\022\037\n\005error\030"
+  "\001 \001(\0162\020.okrpc.ErrorCode\022\024\n\014service_name\030"
+  "\002 \003(\t\022\023\n\013method_name\030\003 \003(\t\")\n\021GetService"
+  "Request\022\024\n\014service_name\030\001 \001(\t\"b\n\022GetServ"
+  "iceResponse\022\037\n\005error\030\001 \001(\0162\020.okrpc.Error"
+  "Code\022\022\n\nproto_file\030\002 \003(\t\022\027\n\017proto_file_n"
+  "ame\030\003 \003(\t2\211\001\n\nRpcService\0228\n\007listRpc\022\025.ok"
+  "rpc.ListRpcRequest\032\026.okrpc.ListRpcRespon"
+  "se\022A\n\ngetService\022\030.okrpc.GetServiceReque"
+  "st\032\031.okrpc.GetServiceResponseB\003\200\001\001b\006prot"
+  "o3"
+  ;
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_rpcservice_2eproto_deps[2] = {
+  &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
+  &::descriptor_table_rpc_2eproto,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_rpcservice_2eproto_sccs[4] = {
+  &scc_info_GetServiceRequest_rpcservice_2eproto.base,
+  &scc_info_GetServiceResponse_rpcservice_2eproto.base,
+  &scc_info_ListRpcRequest_rpcservice_2eproto.base,
+  &scc_info_ListRpcResponse_rpcservice_2eproto.base,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_rpcservice_2eproto_once;
+static bool descriptor_table_rpcservice_2eproto_initialized = false;
+const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_rpcservice_2eproto = {
+  &descriptor_table_rpcservice_2eproto_initialized, descriptor_table_protodef_rpcservice_2eproto, "rpcservice.proto", 522,
+  &descriptor_table_rpcservice_2eproto_once, descriptor_table_rpcservice_2eproto_sccs, descriptor_table_rpcservice_2eproto_deps, 4, 2,
+  schemas, file_default_instances, TableStruct_rpcservice_2eproto::offsets,
+  file_level_metadata_rpcservice_2eproto, 4, file_level_enum_descriptors_rpcservice_2eproto, file_level_service_descriptors_rpcservice_2eproto,
+};
 
-void protobuf_AssignDescriptorsOnce() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\020rpcservice.proto\022\005okrpc\032\trpc.proto\";\n\016"
-      "ListRpcRequest\022\024\n\014service_name\030\001 \001(\t\022\023\n\013"
-      "list_method\030\002 \001(\010\"]\n\017ListRpcResponse\022\037\n\005"
-      "error\030\001 \001(\0162\020.okrpc.ErrorCode\022\024\n\014service"
-      "_name\030\002 \003(\t\022\023\n\013method_name\030\003 \003(\t\")\n\021GetS"
-      "erviceRequest\022\024\n\014service_name\030\001 \001(\t\"b\n\022G"
-      "etServiceResponse\022\037\n\005error\030\001 \001(\0162\020.okrpc"
-      ".ErrorCode\022\022\n\nproto_file\030\002 \003(\t\022\027\n\017proto_"
-      "file_name\030\003 \003(\t2\211\001\n\nRpcService\0228\n\007listRp"
-      "c\022\025.okrpc.ListRpcRequest\032\026.okrpc.ListRpc"
-      "Response\022A\n\ngetService\022\030.okrpc.GetServic"
-      "eRequest\032\031.okrpc.GetServiceResponseB7\n\033c"
-      "om.chenshuo.muduo.protorpcB\017RpcServicePr"
-      "oto\200\001\001\210\001\001\220\001\001b\006proto3"
-  };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 540);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "rpcservice.proto", &protobuf_RegisterTypes);
-  ::protobuf_rpc_2eproto::AddDescriptors();
-}
-
-void AddDescriptors() {
-  static ::google::protobuf::internal::once_flag once;
-  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_rpcservice_2eproto
+// Force running AddDescriptors() at dynamic initialization time.
+static bool dynamic_init_dummy_rpcservice_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_rpcservice_2eproto), true);
 namespace okrpc {
 
 // ===================================================================
 
 void ListRpcRequest::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ListRpcRequest::kServiceNameFieldNumber;
-const int ListRpcRequest::kListMethodFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ListRpcRequest::_Internal {
+ public:
+};
 
 ListRpcRequest::ListRpcRequest()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_rpcservice_2eproto::scc_info_ListRpcRequest.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:okrpc.ListRpcRequest)
 }
 ListRpcRequest::ListRpcRequest(const ListRpcRequest& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  service_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.service_name().size() > 0) {
-    service_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_name_);
+  service_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_service_name().empty()) {
+    service_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.service_name_);
   }
   list_method_ = from.list_method_;
   // @@protoc_insertion_point(copy_constructor:okrpc.ListRpcRequest)
 }
 
 void ListRpcRequest::SharedCtor() {
-  service_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ListRpcRequest_rpcservice_2eproto.base);
+  service_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   list_method_ = false;
 }
 
@@ -248,148 +213,95 @@ ListRpcRequest::~ListRpcRequest() {
 }
 
 void ListRpcRequest::SharedDtor() {
-  service_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  service_name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void ListRpcRequest::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ListRpcRequest::descriptor() {
-  ::protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ListRpcRequest& ListRpcRequest::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_rpcservice_2eproto::scc_info_ListRpcRequest.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ListRpcRequest_rpcservice_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ListRpcRequest::Clear() {
 // @@protoc_insertion_point(message_clear_start:okrpc.ListRpcRequest)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  service_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  service_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   list_method_ = false;
   _internal_metadata_.Clear();
 }
 
-bool ListRpcRequest::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:okrpc.ListRpcRequest)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ListRpcRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // string service_name = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_service_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->service_name().data(), static_cast<int>(this->service_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "okrpc.ListRpcRequest.service_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(_internal_mutable_service_name(), ptr, ctx, "okrpc.ListRpcRequest.service_name");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // bool list_method = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &list_method_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          list_method_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:okrpc.ListRpcRequest)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:okrpc.ListRpcRequest)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ListRpcRequest::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:okrpc.ListRpcRequest)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string service_name = 1;
-  if (this->service_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_name().data(), static_cast<int>(this->service_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "okrpc.ListRpcRequest.service_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->service_name(), output);
-  }
-
-  // bool list_method = 2;
-  if (this->list_method() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->list_method(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:okrpc.ListRpcRequest)
-}
-
-::google::protobuf::uint8* ListRpcRequest::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ListRpcRequest::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:okrpc.ListRpcRequest)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // string service_name = 1;
   if (this->service_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_name().data(), static_cast<int>(this->service_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_service_name().data(), static_cast<int>(this->_internal_service_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "okrpc.ListRpcRequest.service_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->service_name(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_service_name(), target);
   }
 
   // bool list_method = 2;
   if (this->list_method() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->list_method(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_list_method(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:okrpc.ListRpcRequest)
   return target;
@@ -399,16 +311,15 @@ size_t ListRpcRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:okrpc.ListRpcRequest)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // string service_name = 1;
   if (this->service_name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->service_name());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_service_name());
   }
 
   // bool list_method = 2;
@@ -416,20 +327,24 @@ size_t ListRpcRequest::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ListRpcRequest::MergeFrom(const ::google::protobuf::Message& from) {
+void ListRpcRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:okrpc.ListRpcRequest)
   GOOGLE_DCHECK_NE(&from, this);
   const ListRpcRequest* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ListRpcRequest>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ListRpcRequest>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:okrpc.ListRpcRequest)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:okrpc.ListRpcRequest)
     MergeFrom(*source);
@@ -440,19 +355,19 @@ void ListRpcRequest::MergeFrom(const ListRpcRequest& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:okrpc.ListRpcRequest)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.service_name().size() > 0) {
 
-    service_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_name_);
+    service_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.service_name_);
   }
   if (from.list_method() != 0) {
-    set_list_method(from.list_method());
+    _internal_set_list_method(from._internal_list_method());
   }
 }
 
-void ListRpcRequest::CopyFrom(const ::google::protobuf::Message& from) {
+void ListRpcRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:okrpc.ListRpcRequest)
   if (&from == this) return;
   Clear();
@@ -470,21 +385,16 @@ bool ListRpcRequest::IsInitialized() const {
   return true;
 }
 
-void ListRpcRequest::Swap(ListRpcRequest* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ListRpcRequest::InternalSwap(ListRpcRequest* other) {
   using std::swap;
-  service_name_.Swap(&other->service_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  service_name_.Swap(&other->service_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(list_method_, other->list_method_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
 }
 
-::google::protobuf::Metadata ListRpcRequest::GetMetadata() const {
-  protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ListRpcRequest::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -492,22 +402,18 @@ void ListRpcRequest::InternalSwap(ListRpcRequest* other) {
 
 void ListRpcResponse::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ListRpcResponse::kErrorFieldNumber;
-const int ListRpcResponse::kServiceNameFieldNumber;
-const int ListRpcResponse::kMethodNameFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class ListRpcResponse::_Internal {
+ public:
+};
 
 ListRpcResponse::ListRpcResponse()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_rpcservice_2eproto::scc_info_ListRpcResponse.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:okrpc.ListRpcResponse)
 }
 ListRpcResponse::ListRpcResponse(const ListRpcResponse& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
       service_name_(from.service_name_),
       method_name_(from.method_name_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -516,6 +422,7 @@ ListRpcResponse::ListRpcResponse(const ListRpcResponse& from)
 }
 
 void ListRpcResponse::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ListRpcResponse_rpcservice_2eproto.base);
   error_ = 0;
 }
 
@@ -530,20 +437,15 @@ void ListRpcResponse::SharedDtor() {
 void ListRpcResponse::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* ListRpcResponse::descriptor() {
-  ::protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const ListRpcResponse& ListRpcResponse::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_rpcservice_2eproto::scc_info_ListRpcResponse.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ListRpcResponse_rpcservice_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ListRpcResponse::Clear() {
 // @@protoc_insertion_point(message_clear_start:okrpc.ListRpcResponse)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -553,160 +455,101 @@ void ListRpcResponse::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool ListRpcResponse::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:okrpc.ListRpcResponse)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* ListRpcResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .okrpc.ErrorCode error = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          set_error(static_cast< ::okrpc::ErrorCode >(value));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_error(static_cast<::okrpc::ErrorCode>(val));
+        } else goto handle_unusual;
+        continue;
       // repeated string service_name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_service_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->service_name(this->service_name_size() - 1).data(),
-            static_cast<int>(this->service_name(this->service_name_size() - 1).length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "okrpc.ListRpcResponse.service_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(_internal_add_service_name(), ptr, ctx, "okrpc.ListRpcResponse.service_name");
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else goto handle_unusual;
+        continue;
       // repeated string method_name = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_method_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->method_name(this->method_name_size() - 1).data(),
-            static_cast<int>(this->method_name(this->method_name_size() - 1).length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "okrpc.ListRpcResponse.method_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(_internal_add_method_name(), ptr, ctx, "okrpc.ListRpcResponse.method_name");
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:okrpc.ListRpcResponse)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:okrpc.ListRpcResponse)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void ListRpcResponse::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:okrpc.ListRpcResponse)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .okrpc.ErrorCode error = 1;
-  if (this->error() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->error(), output);
-  }
-
-  // repeated string service_name = 2;
-  for (int i = 0, n = this->service_name_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_name(i).data(), static_cast<int>(this->service_name(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "okrpc.ListRpcResponse.service_name");
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->service_name(i), output);
-  }
-
-  // repeated string method_name = 3;
-  for (int i = 0, n = this->method_name_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->method_name(i).data(), static_cast<int>(this->method_name(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "okrpc.ListRpcResponse.method_name");
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->method_name(i), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:okrpc.ListRpcResponse)
-}
-
-::google::protobuf::uint8* ListRpcResponse::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* ListRpcResponse::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:okrpc.ListRpcResponse)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .okrpc.ErrorCode error = 1;
   if (this->error() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->error(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_error(), target);
   }
 
   // repeated string service_name = 2;
-  for (int i = 0, n = this->service_name_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_name(i).data(), static_cast<int>(this->service_name(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+  for (int i = 0, n = this->_internal_service_name_size(); i < n; i++) {
+    const auto& s = this->_internal_service_name(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "okrpc.ListRpcResponse.service_name");
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(2, this->service_name(i), target);
+    target = stream->WriteString(2, s, target);
   }
 
   // repeated string method_name = 3;
-  for (int i = 0, n = this->method_name_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->method_name(i).data(), static_cast<int>(this->method_name(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+  for (int i = 0, n = this->_internal_method_name_size(); i < n; i++) {
+    const auto& s = this->_internal_method_name(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "okrpc.ListRpcResponse.method_name");
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(3, this->method_name(i), target);
+    target = stream->WriteString(3, s, target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:okrpc.ListRpcResponse)
   return target;
@@ -716,47 +559,50 @@ size_t ListRpcResponse::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:okrpc.ListRpcResponse)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated string service_name = 2;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->service_name_size());
-  for (int i = 0, n = this->service_name_size(); i < n; i++) {
-    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->service_name(i));
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(service_name_.size());
+  for (int i = 0, n = service_name_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      service_name_.Get(i));
   }
 
   // repeated string method_name = 3;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->method_name_size());
-  for (int i = 0, n = this->method_name_size(); i < n; i++) {
-    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->method_name(i));
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(method_name_.size());
+  for (int i = 0, n = method_name_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      method_name_.Get(i));
   }
 
   // .okrpc.ErrorCode error = 1;
   if (this->error() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->error());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_error());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ListRpcResponse::MergeFrom(const ::google::protobuf::Message& from) {
+void ListRpcResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:okrpc.ListRpcResponse)
   GOOGLE_DCHECK_NE(&from, this);
   const ListRpcResponse* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ListRpcResponse>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ListRpcResponse>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:okrpc.ListRpcResponse)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:okrpc.ListRpcResponse)
     MergeFrom(*source);
@@ -767,17 +613,17 @@ void ListRpcResponse::MergeFrom(const ListRpcResponse& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:okrpc.ListRpcResponse)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   service_name_.MergeFrom(from.service_name_);
   method_name_.MergeFrom(from.method_name_);
   if (from.error() != 0) {
-    set_error(from.error());
+    _internal_set_error(from._internal_error());
   }
 }
 
-void ListRpcResponse::CopyFrom(const ::google::protobuf::Message& from) {
+void ListRpcResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:okrpc.ListRpcResponse)
   if (&from == this) return;
   Clear();
@@ -795,21 +641,16 @@ bool ListRpcResponse::IsInitialized() const {
   return true;
 }
 
-void ListRpcResponse::Swap(ListRpcResponse* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ListRpcResponse::InternalSwap(ListRpcResponse* other) {
   using std::swap;
-  service_name_.InternalSwap(CastToBase(&other->service_name_));
-  method_name_.InternalSwap(CastToBase(&other->method_name_));
-  swap(error_, other->error_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  service_name_.InternalSwap(&other->service_name_);
+  method_name_.InternalSwap(&other->method_name_);
+  swap(error_, other->error_);
 }
 
-::google::protobuf::Metadata ListRpcResponse::GetMetadata() const {
-  protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ListRpcResponse::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -817,30 +658,29 @@ void ListRpcResponse::InternalSwap(ListRpcResponse* other) {
 
 void GetServiceRequest::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int GetServiceRequest::kServiceNameFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class GetServiceRequest::_Internal {
+ public:
+};
 
 GetServiceRequest::GetServiceRequest()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_rpcservice_2eproto::scc_info_GetServiceRequest.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:okrpc.GetServiceRequest)
 }
 GetServiceRequest::GetServiceRequest(const GetServiceRequest& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  service_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.service_name().size() > 0) {
-    service_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_name_);
+  service_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_service_name().empty()) {
+    service_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.service_name_);
   }
   // @@protoc_insertion_point(copy_constructor:okrpc.GetServiceRequest)
 }
 
 void GetServiceRequest::SharedCtor() {
-  service_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GetServiceRequest_rpcservice_2eproto.base);
+  service_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 GetServiceRequest::~GetServiceRequest() {
@@ -849,123 +689,81 @@ GetServiceRequest::~GetServiceRequest() {
 }
 
 void GetServiceRequest::SharedDtor() {
-  service_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  service_name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void GetServiceRequest::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* GetServiceRequest::descriptor() {
-  ::protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const GetServiceRequest& GetServiceRequest::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_rpcservice_2eproto::scc_info_GetServiceRequest.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GetServiceRequest_rpcservice_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void GetServiceRequest::Clear() {
 // @@protoc_insertion_point(message_clear_start:okrpc.GetServiceRequest)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  service_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  service_name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   _internal_metadata_.Clear();
 }
 
-bool GetServiceRequest::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:okrpc.GetServiceRequest)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* GetServiceRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // string service_name = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_service_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->service_name().data(), static_cast<int>(this->service_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "okrpc.GetServiceRequest.service_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(_internal_mutable_service_name(), ptr, ctx, "okrpc.GetServiceRequest.service_name");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:okrpc.GetServiceRequest)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:okrpc.GetServiceRequest)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void GetServiceRequest::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:okrpc.GetServiceRequest)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string service_name = 1;
-  if (this->service_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_name().data(), static_cast<int>(this->service_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "okrpc.GetServiceRequest.service_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->service_name(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:okrpc.GetServiceRequest)
-}
-
-::google::protobuf::uint8* GetServiceRequest::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* GetServiceRequest::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:okrpc.GetServiceRequest)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // string service_name = 1;
   if (this->service_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_name().data(), static_cast<int>(this->service_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_service_name().data(), static_cast<int>(this->_internal_service_name().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "okrpc.GetServiceRequest.service_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->service_name(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_service_name(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:okrpc.GetServiceRequest)
   return target;
@@ -975,32 +773,35 @@ size_t GetServiceRequest::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:okrpc.GetServiceRequest)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // string service_name = 1;
   if (this->service_name().size() > 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->service_name());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_service_name());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void GetServiceRequest::MergeFrom(const ::google::protobuf::Message& from) {
+void GetServiceRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:okrpc.GetServiceRequest)
   GOOGLE_DCHECK_NE(&from, this);
   const GetServiceRequest* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const GetServiceRequest>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GetServiceRequest>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:okrpc.GetServiceRequest)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:okrpc.GetServiceRequest)
     MergeFrom(*source);
@@ -1011,16 +812,16 @@ void GetServiceRequest::MergeFrom(const GetServiceRequest& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:okrpc.GetServiceRequest)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (from.service_name().size() > 0) {
 
-    service_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_name_);
+    service_name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.service_name_);
   }
 }
 
-void GetServiceRequest::CopyFrom(const ::google::protobuf::Message& from) {
+void GetServiceRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:okrpc.GetServiceRequest)
   if (&from == this) return;
   Clear();
@@ -1038,20 +839,15 @@ bool GetServiceRequest::IsInitialized() const {
   return true;
 }
 
-void GetServiceRequest::Swap(GetServiceRequest* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void GetServiceRequest::InternalSwap(GetServiceRequest* other) {
   using std::swap;
-  service_name_.Swap(&other->service_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  service_name_.Swap(&other->service_name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
 }
 
-::google::protobuf::Metadata GetServiceRequest::GetMetadata() const {
-  protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata GetServiceRequest::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1059,22 +855,18 @@ void GetServiceRequest::InternalSwap(GetServiceRequest* other) {
 
 void GetServiceResponse::InitAsDefaultInstance() {
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int GetServiceResponse::kErrorFieldNumber;
-const int GetServiceResponse::kProtoFileFieldNumber;
-const int GetServiceResponse::kProtoFileNameFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class GetServiceResponse::_Internal {
+ public:
+};
 
 GetServiceResponse::GetServiceResponse()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  ::google::protobuf::internal::InitSCC(
-      &protobuf_rpcservice_2eproto::scc_info_GetServiceResponse.base);
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:okrpc.GetServiceResponse)
 }
 GetServiceResponse::GetServiceResponse(const GetServiceResponse& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr),
       proto_file_(from.proto_file_),
       proto_file_name_(from.proto_file_name_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -1083,6 +875,7 @@ GetServiceResponse::GetServiceResponse(const GetServiceResponse& from)
 }
 
 void GetServiceResponse::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GetServiceResponse_rpcservice_2eproto.base);
   error_ = 0;
 }
 
@@ -1097,20 +890,15 @@ void GetServiceResponse::SharedDtor() {
 void GetServiceResponse::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
-const ::google::protobuf::Descriptor* GetServiceResponse::descriptor() {
-  ::protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
 const GetServiceResponse& GetServiceResponse::default_instance() {
-  ::google::protobuf::internal::InitSCC(&protobuf_rpcservice_2eproto::scc_info_GetServiceResponse.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GetServiceResponse_rpcservice_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void GetServiceResponse::Clear() {
 // @@protoc_insertion_point(message_clear_start:okrpc.GetServiceResponse)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -1120,160 +908,101 @@ void GetServiceResponse::Clear() {
   _internal_metadata_.Clear();
 }
 
-bool GetServiceResponse::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:okrpc.GetServiceResponse)
-  for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+const char* GetServiceResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
       // .okrpc.ErrorCode error = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          set_error(static_cast< ::okrpc::ErrorCode >(value));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_set_error(static_cast<::okrpc::ErrorCode>(val));
+        } else goto handle_unusual;
+        continue;
       // repeated string proto_file = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_proto_file()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->proto_file(this->proto_file_size() - 1).data(),
-            static_cast<int>(this->proto_file(this->proto_file_size() - 1).length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "okrpc.GetServiceResponse.proto_file"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(_internal_add_proto_file(), ptr, ctx, "okrpc.GetServiceResponse.proto_file");
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else goto handle_unusual;
+        continue;
       // repeated string proto_file_name = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->add_proto_file_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->proto_file_name(this->proto_file_name_size() - 1).data(),
-            static_cast<int>(this->proto_file_name(this->proto_file_name_size() - 1).length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "okrpc.GetServiceResponse.proto_file_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(_internal_add_proto_file_name(), ptr, ctx, "okrpc.GetServiceResponse.proto_file_name");
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
-        if (tag == 0) {
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
-    }
-  }
+    }  // switch
+  }  // while
 success:
-  // @@protoc_insertion_point(parse_success:okrpc.GetServiceResponse)
-  return true;
+  return ptr;
 failure:
-  // @@protoc_insertion_point(parse_failure:okrpc.GetServiceResponse)
-  return false;
-#undef DO_
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 
-void GetServiceResponse::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:okrpc.GetServiceResponse)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .okrpc.ErrorCode error = 1;
-  if (this->error() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->error(), output);
-  }
-
-  // repeated string proto_file = 2;
-  for (int i = 0, n = this->proto_file_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->proto_file(i).data(), static_cast<int>(this->proto_file(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "okrpc.GetServiceResponse.proto_file");
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->proto_file(i), output);
-  }
-
-  // repeated string proto_file_name = 3;
-  for (int i = 0, n = this->proto_file_name_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->proto_file_name(i).data(), static_cast<int>(this->proto_file_name(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "okrpc.GetServiceResponse.proto_file_name");
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->proto_file_name(i), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:okrpc.GetServiceResponse)
-}
-
-::google::protobuf::uint8* GetServiceResponse::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::PROTOBUF_NAMESPACE_ID::uint8* GetServiceResponse::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:okrpc.GetServiceResponse)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // .okrpc.ErrorCode error = 1;
   if (this->error() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->error(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_error(), target);
   }
 
   // repeated string proto_file = 2;
-  for (int i = 0, n = this->proto_file_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->proto_file(i).data(), static_cast<int>(this->proto_file(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+  for (int i = 0, n = this->_internal_proto_file_size(); i < n; i++) {
+    const auto& s = this->_internal_proto_file(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "okrpc.GetServiceResponse.proto_file");
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(2, this->proto_file(i), target);
+    target = stream->WriteString(2, s, target);
   }
 
   // repeated string proto_file_name = 3;
-  for (int i = 0, n = this->proto_file_name_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->proto_file_name(i).data(), static_cast<int>(this->proto_file_name(i).length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+  for (int i = 0, n = this->_internal_proto_file_name_size(); i < n; i++) {
+    const auto& s = this->_internal_proto_file_name(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "okrpc.GetServiceResponse.proto_file_name");
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(3, this->proto_file_name(i), target);
+    target = stream->WriteString(3, s, target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:okrpc.GetServiceResponse)
   return target;
@@ -1283,47 +1012,50 @@ size_t GetServiceResponse::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:okrpc.GetServiceResponse)
   size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated string proto_file = 2;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->proto_file_size());
-  for (int i = 0, n = this->proto_file_size(); i < n; i++) {
-    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->proto_file(i));
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(proto_file_.size());
+  for (int i = 0, n = proto_file_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      proto_file_.Get(i));
   }
 
   // repeated string proto_file_name = 3;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->proto_file_name_size());
-  for (int i = 0, n = this->proto_file_name_size(); i < n; i++) {
-    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
-      this->proto_file_name(i));
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(proto_file_name_.size());
+  for (int i = 0, n = proto_file_name_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      proto_file_name_.Get(i));
   }
 
   // .okrpc.ErrorCode error = 1;
   if (this->error() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->error());
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_error());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void GetServiceResponse::MergeFrom(const ::google::protobuf::Message& from) {
+void GetServiceResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:okrpc.GetServiceResponse)
   GOOGLE_DCHECK_NE(&from, this);
   const GetServiceResponse* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const GetServiceResponse>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GetServiceResponse>(
           &from);
-  if (source == NULL) {
+  if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:okrpc.GetServiceResponse)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:okrpc.GetServiceResponse)
     MergeFrom(*source);
@@ -1334,17 +1066,17 @@ void GetServiceResponse::MergeFrom(const GetServiceResponse& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:okrpc.GetServiceResponse)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   proto_file_.MergeFrom(from.proto_file_);
   proto_file_name_.MergeFrom(from.proto_file_name_);
   if (from.error() != 0) {
-    set_error(from.error());
+    _internal_set_error(from._internal_error());
   }
 }
 
-void GetServiceResponse::CopyFrom(const ::google::protobuf::Message& from) {
+void GetServiceResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:okrpc.GetServiceResponse)
   if (&from == this) return;
   Clear();
@@ -1362,21 +1094,16 @@ bool GetServiceResponse::IsInitialized() const {
   return true;
 }
 
-void GetServiceResponse::Swap(GetServiceResponse* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void GetServiceResponse::InternalSwap(GetServiceResponse* other) {
   using std::swap;
-  proto_file_.InternalSwap(CastToBase(&other->proto_file_));
-  proto_file_name_.InternalSwap(CastToBase(&other->proto_file_name_));
-  swap(error_, other->error_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
+  proto_file_.InternalSwap(&other->proto_file_);
+  proto_file_name_.InternalSwap(&other->proto_file_name_);
+  swap(error_, other->error_);
 }
 
-::google::protobuf::Metadata GetServiceResponse::GetMetadata() const {
-  protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_rpcservice_2eproto::file_level_metadata[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata GetServiceResponse::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1384,16 +1111,16 @@ void GetServiceResponse::InternalSwap(GetServiceResponse* other) {
 
 RpcService::~RpcService() {}
 
-const ::google::protobuf::ServiceDescriptor* RpcService::descriptor() {
-  protobuf_rpcservice_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_rpcservice_2eproto::file_level_service_descriptors[0];
+const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* RpcService::descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_rpcservice_2eproto);
+  return file_level_service_descriptors_rpcservice_2eproto[0];
 }
 
-const ::google::protobuf::ServiceDescriptor* RpcService::GetDescriptor() {
+const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* RpcService::GetDescriptor() {
   return descriptor();
 }
 
-void RpcService::listRpc(::google::protobuf::RpcController* controller,
+void RpcService::listRpc(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                          const ::okrpc::ListRpcRequest*,
                          ::okrpc::ListRpcResponse*,
                          ::google::protobuf::Closure* done) {
@@ -1401,7 +1128,7 @@ void RpcService::listRpc(::google::protobuf::RpcController* controller,
   done->Run();
 }
 
-void RpcService::getService(::google::protobuf::RpcController* controller,
+void RpcService::getService(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                          const ::okrpc::GetServiceRequest*,
                          ::okrpc::GetServiceResponse*,
                          ::google::protobuf::Closure* done) {
@@ -1409,23 +1136,27 @@ void RpcService::getService(::google::protobuf::RpcController* controller,
   done->Run();
 }
 
-void RpcService::CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                             ::google::protobuf::RpcController* controller,
-                             const ::google::protobuf::Message* request,
-                             ::google::protobuf::Message* response,
+void RpcService::CallMethod(const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method,
+                             ::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                             const ::PROTOBUF_NAMESPACE_ID::Message* request,
+                             ::PROTOBUF_NAMESPACE_ID::Message* response,
                              ::google::protobuf::Closure* done) {
-  GOOGLE_DCHECK_EQ(method->service(), protobuf_rpcservice_2eproto::file_level_service_descriptors[0]);
+  GOOGLE_DCHECK_EQ(method->service(), file_level_service_descriptors_rpcservice_2eproto[0]);
   switch(method->index()) {
     case 0:
       listRpc(controller,
-             ::google::protobuf::down_cast<const ::okrpc::ListRpcRequest*>(request),
-             ::google::protobuf::down_cast< ::okrpc::ListRpcResponse*>(response),
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::okrpc::ListRpcRequest*>(
+                 request),
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::okrpc::ListRpcResponse*>(
+                 response),
              done);
       break;
     case 1:
       getService(controller,
-             ::google::protobuf::down_cast<const ::okrpc::GetServiceRequest*>(request),
-             ::google::protobuf::down_cast< ::okrpc::GetServiceResponse*>(response),
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::okrpc::GetServiceRequest*>(
+                 request),
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::okrpc::GetServiceResponse*>(
+                 response),
              done);
       break;
     default:
@@ -1434,8 +1165,8 @@ void RpcService::CallMethod(const ::google::protobuf::MethodDescriptor* method,
   }
 }
 
-const ::google::protobuf::Message& RpcService::GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
+const ::PROTOBUF_NAMESPACE_ID::Message& RpcService::GetRequestPrototype(
+    const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method) const {
   GOOGLE_DCHECK_EQ(method->service(), descriptor());
   switch(method->index()) {
     case 0:
@@ -1444,13 +1175,13 @@ const ::google::protobuf::Message& RpcService::GetRequestPrototype(
       return ::okrpc::GetServiceRequest::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *::google::protobuf::MessageFactory::generated_factory()
+      return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
           ->GetPrototype(method->input_type());
   }
 }
 
-const ::google::protobuf::Message& RpcService::GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
+const ::PROTOBUF_NAMESPACE_ID::Message& RpcService::GetResponsePrototype(
+    const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method) const {
   GOOGLE_DCHECK_EQ(method->service(), descriptor());
   switch(method->index()) {
     case 0:
@@ -1459,30 +1190,30 @@ const ::google::protobuf::Message& RpcService::GetResponsePrototype(
       return ::okrpc::GetServiceResponse::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *::google::protobuf::MessageFactory::generated_factory()
+      return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
           ->GetPrototype(method->output_type());
   }
 }
 
-RpcService_Stub::RpcService_Stub(::google::protobuf::RpcChannel* channel)
+RpcService_Stub::RpcService_Stub(::PROTOBUF_NAMESPACE_ID::RpcChannel* channel)
   : channel_(channel), owns_channel_(false) {}
 RpcService_Stub::RpcService_Stub(
-    ::google::protobuf::RpcChannel* channel,
-    ::google::protobuf::Service::ChannelOwnership ownership)
+    ::PROTOBUF_NAMESPACE_ID::RpcChannel* channel,
+    ::PROTOBUF_NAMESPACE_ID::Service::ChannelOwnership ownership)
   : channel_(channel),
-    owns_channel_(ownership == ::google::protobuf::Service::STUB_OWNS_CHANNEL) {}
+    owns_channel_(ownership == ::PROTOBUF_NAMESPACE_ID::Service::STUB_OWNS_CHANNEL) {}
 RpcService_Stub::~RpcService_Stub() {
   if (owns_channel_) delete channel_;
 }
 
-void RpcService_Stub::listRpc(::google::protobuf::RpcController* controller,
+void RpcService_Stub::listRpc(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                               const ::okrpc::ListRpcRequest* request,
                               ::okrpc::ListRpcResponse* response,
                               ::google::protobuf::Closure* done) {
   channel_->CallMethod(descriptor()->method(0),
                        controller, request, response, done);
 }
-void RpcService_Stub::getService(::google::protobuf::RpcController* controller,
+void RpcService_Stub::getService(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                               const ::okrpc::GetServiceRequest* request,
                               ::okrpc::GetServiceResponse* response,
                               ::google::protobuf::Closure* done) {
@@ -1492,21 +1223,20 @@ void RpcService_Stub::getService(::google::protobuf::RpcController* controller,
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace okrpc
-namespace google {
-namespace protobuf {
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::okrpc::ListRpcRequest* Arena::CreateMaybeMessage< ::okrpc::ListRpcRequest >(Arena* arena) {
+PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::okrpc::ListRpcRequest* Arena::CreateMaybeMessage< ::okrpc::ListRpcRequest >(Arena* arena) {
   return Arena::CreateInternal< ::okrpc::ListRpcRequest >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::okrpc::ListRpcResponse* Arena::CreateMaybeMessage< ::okrpc::ListRpcResponse >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::okrpc::ListRpcResponse* Arena::CreateMaybeMessage< ::okrpc::ListRpcResponse >(Arena* arena) {
   return Arena::CreateInternal< ::okrpc::ListRpcResponse >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::okrpc::GetServiceRequest* Arena::CreateMaybeMessage< ::okrpc::GetServiceRequest >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::okrpc::GetServiceRequest* Arena::CreateMaybeMessage< ::okrpc::GetServiceRequest >(Arena* arena) {
   return Arena::CreateInternal< ::okrpc::GetServiceRequest >(arena);
 }
-template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::okrpc::GetServiceResponse* Arena::CreateMaybeMessage< ::okrpc::GetServiceResponse >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::okrpc::GetServiceResponse* Arena::CreateMaybeMessage< ::okrpc::GetServiceResponse >(Arena* arena) {
   return Arena::CreateInternal< ::okrpc::GetServiceResponse >(arena);
 }
-}  // namespace protobuf
-}  // namespace google
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
+#include <google/protobuf/port_undef.inc>

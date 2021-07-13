@@ -6,7 +6,9 @@
 
 
 //#include <m>
-#include "../sudoku.pb.h"
+#include "../proto/sudoku.pb.h"
+#include "../proto/heartBeat.pb.h"
+
 #include "../RpcChannel.h"
 
 #include <stdio.h>
@@ -23,7 +25,10 @@ class RpcClient
     : loop_(loop),
       client_(loop, serverAddr, "RpcClient"),
       channel_(new okrpc::RpcChannel),
-      stub_(get_pointer(channel_))
+      stub_(get_pointer(channel_)),
+      
+      heartBeatStub(get_pointer(channel_))
+
   {
     client_.setConnectionCallback(
         std::bind(&RpcClient::onConnection, this, _1));
@@ -46,7 +51,7 @@ class RpcClient
       channel_->setConnection(conn);
       sudoku::SudokuRequest request;
       request.set_checkerboard("001010");
-      sudoku::SudokuResponse* response = new sudoku::SudokuResponse;
+      sudoku::SudokuResponse* response = new sudoku::SudokuResponse();
 
       stub_.Solve(NULL, &request, response, NewCallback(this, &RpcClient::solved, response));
     }
@@ -58,14 +63,35 @@ class RpcClient
 
   void solved(sudoku::SudokuResponse* resp)
   {
-    LOG_INFO << "solved:\n" << resp->DebugString();     //？？？未输出答案
-    client_.disconnect();
+        LOG_INFO << "solved:\n" << resp->DebugString();   
+
+        dingdong();
+
+
+    //client_.disconnect();
   }
+
+    void dingdong(){
+
+        LOG_INFO<<"send dingdong msg....\n";
+        heartBeat::HeartBeatRequest req;
+        req.set_heartbeartreq("ding dong msg");
+
+        heartBeat::HeartBeatResponse* rsp = new heartBeat::HeartBeatResponse();
+
+        heartBeatStub.HeartBeat(NULL,&req,rsp,NULL);
+
+        client_.disconnect();
+    }
+
+
 
   EventLoop* loop_;
   TcpClient client_;
   okrpc::RpcChannelPtr channel_;
   sudoku::SudokuService::Stub stub_;
+
+  heartBeat::HeartBeatService_Stub heartBeatStub;
 };
 
 int main(int argc, char* argv[])

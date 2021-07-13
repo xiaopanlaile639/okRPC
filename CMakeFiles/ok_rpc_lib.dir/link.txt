@@ -1,0 +1,2 @@
+/usr/bin/ar qc libok_rpc_lib.a  CMakeFiles/ok_rpc_lib.dir/RpcChannel.cc.o CMakeFiles/ok_rpc_lib.dir/RpcServer.cc.o CMakeFiles/ok_rpc_lib.dir/RpcService.cc.o CMakeFiles/ok_rpc_lib.dir/rpc.pb.cc.o CMakeFiles/ok_rpc_lib.dir/rpcservice.pb.cc.o CMakeFiles/ok_rpc_lib.dir/sudoku.pb.cc.o
+/usr/bin/ranlib libok_rpc_lib.a

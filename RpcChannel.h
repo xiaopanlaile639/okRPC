@@ -29,24 +29,6 @@ namespace google
     class Message;           // message.h
     typedef ::std::shared_ptr<Message> MessagePtr;
 
-    // When you upcast (that is, cast a pointer from type Foo to type
-    // SuperclassOfFoo), it's fine to use implicit_cast<>, since upcasts
-    // always succeed.  When you downcast (that is, cast a pointer from
-    // type Foo to type SubclassOfFoo), static_cast<> isn't safe, because
-    // how do you know the pointer is really of type SubclassOfFoo?  It
-    // could be a bare Foo, or of type DifferentSubclassOfFoo.  Thus,
-    // when you downcast, you should use this macro.  In debug mode, we
-    // use dynamic_cast<> to double-check the downcast is legal (we die
-    // if it's not).  In normal mode, we do the efficient static_cast<>
-    // instead.  Thus, it's important to test in debug mode to make sure
-    // the cast is legal!
-    //    This is the only place in the code we should use dynamic_cast<>.
-    // In particular, you SHOULDN'T be using dynamic_cast<> in order to
-    // do RTTI (eg code like this:
-    //    if (dynamic_cast<Subclass1>(foo)) HandleASubclass1Object(foo);
-    //    if (dynamic_cast<Subclass2>(foo)) HandleASubclass2Object(foo);
-    // You should design the code some other way not to need this.
-
     template <typename To, typename From> // use like this: down_pointer_cast<T>(foo);
     inline ::std::shared_ptr<To> down_pointer_cast(const ::std::shared_ptr<From> &f)
     {
@@ -114,35 +96,6 @@ namespace okrpc
                   const ::google::protobuf::Message* request,
                   ::google::protobuf::Message* response,
                   ::google::protobuf::Closure* done) override;
-    
-    
-   // typedef ::std::function<void(const ::google::protobuf::MessagePtr &)> ClientDoneCallback;
-
-    // Call the given method of the remote service.  The signature of this
-    // procedure looks the same as Service::CallMethod(), but the requirements
-    // are less strict in one important way:  the request and response objects
-    // need not be of any specific class as long as their descriptors are
-    // method->input_type() and method->output_type().
-    // void CallMethod(const ::google::protobuf::MethodDescriptor *method,
-    //                 const ::google::protobuf::Message &request,
-    //                 const ::google::protobuf::Message *response,
-    //                 const ClientDoneCallback &done);
-
-    // template <typename Output>
-    // static void downcastcall(const ::std::function<void(const std::shared_ptr<Output> &)> &done,
-    //                          const ::google::protobuf::MessagePtr &output)
-    // {
-    //   done(::google::protobuf::down_pointer_cast<Output>(output));
-    // }
-
-    // template <typename Output>
-    // void CallMethod(const ::google::protobuf::MethodDescriptor *method,
-    //                 const ::google::protobuf::Message &request,
-    //                 const Output *response,
-    //                 const ::std::function<void(const std::shared_ptr<Output> &)> &done)
-    // {
-    //   CallMethod(method, request, response, std::bind(&downcastcall<Output>, done, _1));
-    // }
 
     void onDisconnect();
 

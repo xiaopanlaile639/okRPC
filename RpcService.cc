@@ -84,43 +84,7 @@ const ::okrpc::GetServiceRequest* request,
 }
 
 
-// void RpcServiceImpl::listRpc(const ListRpcRequestPtr& request,
-//                              const ListRpcResponse* responsePrototype,
-//                              const RpcDoneCallback& done)
-// {
-//   ListRpcResponse response;
-//   if (request->has_service_name())
-//   {
-//     ServiceMap::const_iterator it = services_->find(request->service_name());
-//     if (it != services_->end())
-//     {
-//       response.set_error(NO_ERROR);
-//       response.add_service_name(it->first);
-//       if (request->list_method())
-//       {
-//         addMethodNames(it->second->GetDescriptor(), &response);
-//       }
-//     }
-//     else
-//     {
-//       response.set_error(NO_SERVICE);
-//     }
-//   }
-//   else
-//   {
-//     response.set_error(NO_ERROR);
-//     for (ServiceMap::const_iterator it = services_->begin();
-//         it != services_->end(); ++it)
-//     {
-//       response.add_service_name(it->first);
-//       if (request->list_method())
-//       {
-//         addMethodNames(it->second->GetDescriptor(), &response);
-//       }
-//     }
-//   }
-//   done(&response);
-// }
+
 
 // void RpcServiceImpl::getService(const GetServiceRequestPtr& request,
 //                                 const GetServiceResponse* responsePrototype,

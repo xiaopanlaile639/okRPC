@@ -1,7 +1,6 @@
 #ifndef MUDUO_PROTORPC2_RPCSERVICE_H
 #define MUDUO_PROTORPC2_RPCSERVICE_H
 
-//#include <muduo/protorpc2/rpcservice.pb.h>
 
 #include "rpcservice.pb.h"
 

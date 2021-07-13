@@ -6,7 +6,7 @@ project (ok_rpc_lib)
 message(STATUS "in lib cmake....")
 
 
-set(NET_LIB_DIR "/root/myPro/cppPro/build/release-install-cpp11")
+set(NET_LIB_DIR "../muduoRPC_all/build/release-install-cpp11")
 
 include_directories(${NET_LIB_DIR}/include) # 头文件的路径
 link_directories( ${NET_LIB_DIR}/lib/) # .a文件的路径
@@ -33,7 +33,7 @@ target_link_libraries(${PROJECT_NAME}
 
 
 add_subdirectory(proto)
-add_subdirectory(rpcbench)
-# add_subdirectory(server)
-# add_subdirectory(client)
+# add_subdirectory(rpcbench)
+add_subdirectory(server)
+add_subdirectory(client)
 

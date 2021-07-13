@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package okrpc;
 // option go_package = "muduorpc";
-option java_package = "com.chenshuo.muduo.protorpc";
-option java_outer_classname = "RpcProto";
+//option java_package = "com.chenshuo.muduo.protorpc";
+//option java_outer_classname = "RpcProto";
 
 enum MessageType
 {
