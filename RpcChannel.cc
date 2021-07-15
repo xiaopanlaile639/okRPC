@@ -11,16 +11,16 @@
 #include "rpc.pb.h"
 #include "RpcChannel.h"
 
+#include "utilities/ZkClient.h"
+
 using namespace muduo;
 using namespace muduo::net;
 using namespace okrpc;
 
-
-
 //Q:为什么需要定义在这？
 namespace okrpc
 {
-const char rpctag [] = "RPC0";
+    const char rpctag[] = "RPC0";
 }
 
 //////////////////utilities///////////////////////////
@@ -36,22 +36,20 @@ const char rpctag [] = "RPC0";
 //   return ptr.get();
 // }
 
-
 //////////////////////////////////////////////////
-
 
 static int test_down_pointer_cast()
 {
-  //Q:为什么外部已经引用了okrpc，这里RpcMessage还需要加上域作用符号
+    //Q:为什么外部已经引用了okrpc，这里RpcMessage还需要加上域作用符号
 
-  ::std::shared_ptr<::google::protobuf::Message> msg(new okrpc::RpcMessage);
-  ::std::shared_ptr<okrpc::RpcMessage> rpc(::google::protobuf::down_pointer_cast<okrpc::RpcMessage>(msg));
-  assert(msg && rpc);
-  if (!rpc)
-  {
-    abort();
-  }
-  return 0;
+    ::std::shared_ptr<::google::protobuf::Message> msg(new okrpc::RpcMessage);
+    ::std::shared_ptr<okrpc::RpcMessage> rpc(::google::protobuf::down_pointer_cast<okrpc::RpcMessage>(msg));
+    assert(msg && rpc);
+    if (!rpc)
+    {
+        abort();
+    }
+    return 0;
 }
 
 static int dummy __attribute__((unused)) = test_down_pointer_cast();
@@ -60,7 +58,7 @@ RpcChannel::RpcChannel()
     : codec_(std::bind(&RpcChannel::onRpcMessage, this, _1, _2, _3)),
       services_(NULL)
 {
-  LOG_INFO << "RpcChannel::ctor - " << this;
+    LOG_INFO << "RpcChannel::ctor - " << this;
 }
 
 RpcChannel::RpcChannel(const TcpConnectionPtr &conn)
@@ -68,189 +66,253 @@ RpcChannel::RpcChannel(const TcpConnectionPtr &conn)
       conn_(conn),
       services_(NULL)
 {
-  LOG_INFO << "RpcChannel::ctor - " << this;
+    pendingReqMsg = nullptr;
+    LOG_INFO << "RpcChannel::ctor - " << this;
 }
 
 RpcChannel::~RpcChannel()
 {
-  LOG_INFO << "RpcChannel::dtor - " << this;
+    LOG_INFO << "RpcChannel::dtor - " << this;
 }
 
+// //通过服务名称获取ZK中的服务地址
+// int GetServiceAddr(std::string serviceName, InetAddress &serviceAddr)
+// {
+
+//     ZkClient zk;
+//     zk.start();
+//     string path = zk.getRootPath() + "/" + serviceName;
+
+//     string host = zk.get(path.c_str());
+
+//     if (host.empty())
+//     {
+//         LOG_ERROR << " can't get available server: " << path;
+//         return -1;
+//     }
+
+//     int idx = host.find(':');
+//     string ip = host.substr(0, idx);
+//     unsigned short port = atoi(host.substr(idx + 1).c_str();
+    
+//     serviceAddr = InetAddress(ip,port);
+
+//     return 0;
+// }
 
 
-void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                            google::protobuf::RpcController* controller,
-                            const ::google::protobuf::Message* request,
-                            ::google::protobuf::Message* response,
-                            ::google::protobuf::Closure* done)
+//发送调用方法的消息
+void RpcChannel::AfterConnCallMethod(const TcpConnectionPtr &conn){
+    
+    //fix: 同时发送多个请求？？？
+    if(pendingReqMsg != nullptr){
+        codec_.send(conn, *pendingReqMsg);
+    }
+    
+}
+
+void RpcChannel::BeforeConnCallMethod(const ::google::protobuf::MethodDescriptor *method,
+                            google::protobuf::RpcController *controller,
+                            const ::google::protobuf::Message *request,
+                            ::google::protobuf::Message *response,
+                            ::google::protobuf::Closure *done)
 {
-  RpcMessage message;
-  message.set_type(REQUEST);
-  int64_t id = id_.incrementAndGet();
-  message.set_id(id);
-  message.set_service(method->service()->full_name());
-  message.set_method(method->name());
-  message.set_request(request->SerializeAsString()); // FIXME: error check
+    pendingReqMsg = std::make_unique<RpcMessage>();
 
-  OutstandingCall out = { response, done };
-  {
-  MutexLockGuard lock(mutex_);
-  outstandings_[id] = out;
-  }
-  codec_.send(conn_, message);
+    pendingReqMsg->set_type(REQUEST);
+    int64_t id = id_.incrementAndGet();
+    pendingReqMsg->set_id(id);
+    pendingReqMsg->set_service(method->service()->full_name());
+    pendingReqMsg->set_method(method->name());
+    pendingReqMsg->set_request(request->SerializeAsString()); // FIXME: error check
+
+    //RpcMessage *message = new RpcMessage();
+    // message->set_type(REQUEST);
+    // int64_t id = id_.incrementAndGet();
+    // message->set_id(id);
+    // message->set_service(method->service()->full_name());
+    // message->set_method(method->name());
+    // message->set_request(request->SerializeAsString()); // FIXME: error check
+
+    OutstandingCall out = {response, done};
+    {
+        MutexLockGuard lock(mutex_);
+        outstandings_[id] = out;
+    }
+
+
 }
 
+// void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor *method,
+//                             google::protobuf::RpcController *controller,
+//                             const ::google::protobuf::Message *request,
+//                             ::google::protobuf::Message *response,
+//                             ::google::protobuf::Closure *done)
+// {
+//     RpcMessage message;
+//     message.set_type(REQUEST);
+//     int64_t id = id_.incrementAndGet();
+//     message.set_id(id);
+//     message.set_service(method->service()->full_name());
+//     message.set_method(method->name());
+//     message.set_request(request->SerializeAsString()); // FIXME: error check
+
+//     OutstandingCall out = {response, done};
+//     {
+//         MutexLockGuard lock(mutex_);
+//         outstandings_[id] = out;
+//     }
+
+
+//     codec_.send(conn_, message);
+// }
 
 void RpcChannel::onDisconnect()
 {
-  //FIXME:
+    //FIXME:
 }
 
 void RpcChannel::onMessage(const TcpConnectionPtr &conn,
                            Buffer *buf,
                            Timestamp receiveTime)
 {
-  LOG_TRACE << "RpcChannel::onMessage " << buf->readableBytes();
-  codec_.onMessage(conn, buf, receiveTime);
+    LOG_TRACE << "RpcChannel::onMessage " << buf->readableBytes();
+    codec_.onMessage(conn, buf, receiveTime);
 }
 
 void RpcChannel::onRpcMessage(const TcpConnectionPtr &conn,
                               const RpcMessagePtr &messagePtr,
                               Timestamp receiveTime)
 {
-  assert(conn == conn_);
-  //printf("%s\n", message.DebugString().c_str());
-  RpcMessage &message = *messagePtr;
+    assert(conn == conn_);
+    //printf("%s\n", message.DebugString().c_str());
+    RpcMessage &message = *messagePtr;
 
-  LOG_TRACE << "RpcChannel::onRpcMessage " << message.DebugString();
-  
-  if (message.type() == RESPONSE)       //回复消息
-  {
-    int64_t id = message.id();
-    //assert(message.has_response());
-    assert(!message.response().empty()); //断言不为空
+    LOG_TRACE << "RpcChannel::onRpcMessage " << message.DebugString();
 
-    OutstandingCall out = {NULL, NULL};
-    bool found = false;
-
+    if (message.type() == RESPONSE) //回复消息
     {
-      MutexLockGuard lock(mutex_);
-      std::map<int64_t, OutstandingCall>::iterator it = outstandings_.find(id);
-      if (it != outstandings_.end())
-      {
-        out = it->second;
-        outstandings_.erase(it);
-        found = true;
-      }
-      else
-      {
-#ifndef NDEBUG
-        LOG_WARN << "Size " << outstandings_.size();
-        for (it = outstandings_.begin(); it != outstandings_.end(); ++it)
+        int64_t id = message.id();
+        //assert(message.has_response());
+        assert(!message.response().empty()); //断言不为空
+
+        OutstandingCall out = {NULL, NULL};
+        bool found = false;
+
         {
-          LOG_WARN << "id " << it->first;
-        }
+            MutexLockGuard lock(mutex_);
+            std::map<int64_t, OutstandingCall>::iterator it = outstandings_.find(id);
+            if (it != outstandings_.end())
+            {
+                out = it->second;
+                outstandings_.erase(it);
+                found = true;
+            }
+            else
+            {
+#ifndef NDEBUG
+                LOG_WARN << "Size " << outstandings_.size();
+                for (it = outstandings_.begin(); it != outstandings_.end(); ++it)
+                {
+                    LOG_WARN << "id " << it->first;
+                }
 #endif
-      }
-    }
+            }
+        }
 
-    if (!found)
-    {
-      LOG_ERROR << "Unknown RESPONSE";
-    }
+        if (!found)
+        {
+            LOG_ERROR << "Unknown RESPONSE";
+        }
 
-    if (out.response)
-    {
-      // FIXME: can we move deserialization to other thread?
+        if (out.response)
+        {
+            // FIXME: can we move deserialization to other thread?
 
-      //Q:这个地方有错误？
-      //A:不应该重新新建一个response
-      
-      //::google::protobuf::MessagePtr response(out.response->New());
-       //response->ParseFromString(message.response());
-      out.response->ParseFromString(message.response());
-     
-      if (out.done)
-      {
-        out.done->Run();  //(response);
-      }
+            //Q:这个地方有错误？
+            //A:不应该重新新建一个response
+
+            //::google::protobuf::MessagePtr response(out.response->New());
+            //response->ParseFromString(message.response());
+            out.response->ParseFromString(message.response());
+
+            if (out.done)
+            {
+                out.done->Run(); //(response);
+            }
+        }
+        else
+        {
+            LOG_ERROR << "No Response prototype";
+        }
     }
-    else
+    else if (message.type() == REQUEST) //请求消息
     {
-      LOG_ERROR << "No Response prototype";
+        callServiceMethod(message);
     }
-  }
-  else if (message.type() == REQUEST)   //请求消息
-  {
-    callServiceMethod(message);
-  }
-  else if (message.type() == ERROR)
-  {
-    // FIXME:
-  }
+    else if (message.type() == ERROR)
+    {
+        // FIXME:
+    }
 }
-
 
 //rpcMessage中调用此方法，来调用最终的服务函数
 void RpcChannel::callServiceMethod(const RpcMessage &message)
 {
-  if (services_)
-  {
-    ServiceMap::const_iterator it = services_->find(message.service());
-    if (it != services_->end())
+    if (services_)
     {
-      Service *service = it->second;
-      assert(service != NULL);
-      const google::protobuf::ServiceDescriptor *desc = service->GetDescriptor();
-      const google::protobuf::MethodDescriptor *method = desc->FindMethodByName(message.method());
-      
-      if (method)
-      {
-        // FIXME: can we move deserialization to other thread?
-        //const
-        //::google::protobuf::MessagePtr request(service->GetRequestPrototype(method).New());
-         std::unique_ptr<google::protobuf::Message> request(service->GetRequestPrototype(method).New());
+        ServiceMap::const_iterator it = services_->find(message.service());
+        if (it != services_->end())
+        {
+            Service *service = it->second;
+            assert(service != NULL);
+            const google::protobuf::ServiceDescriptor *desc = service->GetDescriptor();
+            const google::protobuf::MethodDescriptor *method = desc->FindMethodByName(message.method());
 
-        request->ParseFromString(message.request());
-        int64_t id = message.id();
-        //const ::google::protobuf::Message *responsePrototype = &service->GetResponsePrototype(method);
-        
-        ::google::protobuf::Message * response = service->GetResponsePrototype(method).New();
-        // service->CallMethod(method, request, responsePrototype,
-        //                     std::bind(&RpcChannel::doneCallback, this, responsePrototype, _1, id));
+            if (method)
+            {
+                // FIXME: can we move deserialization to other thread?
+                //const
+                //::google::protobuf::MessagePtr request(service->GetRequestPrototype(method).New());
+                std::unique_ptr<google::protobuf::Message> request(service->GetRequestPrototype(method).New());
 
-        //fixit: 第三个参数传递智能指针
-        service->CallMethod(method,nullptr,get_pointer(request),response, 
-                          NewCallback(this, &RpcChannel::doneCallback, response, id));
-                          //std::bind(&RpcChannel::doneCallback, this, response, _1, id))
-                          
-      }
-      else
-      {
-        // FIXME:
-      }
+                request->ParseFromString(message.request());
+                int64_t id = message.id();
+                //const ::google::protobuf::Message *responsePrototype = &service->GetResponsePrototype(method);
+
+                ::google::protobuf::Message *response = service->GetResponsePrototype(method).New();
+                // service->CallMethod(method, request, responsePrototype,
+                //                     std::bind(&RpcChannel::doneCallback, this, responsePrototype, _1, id));
+
+                //fixit: 第三个参数传递智能指针
+                service->CallMethod(method, nullptr, get_pointer(request), response,
+                                    NewCallback(this, &RpcChannel::doneCallback, response, id));
+                //std::bind(&RpcChannel::doneCallback, this, response, _1, id))
+            }
+            else
+            {
+                // FIXME:
+            }
+        }
+        else
+        {
+            // FIXME:
+        }
     }
     else
     {
-      // FIXME:
+        // FIXME:
     }
-  }
-  else
-  {
-    // FIXME:
-  }
-
 }
 
-
 //调用完服务函数之后，最后需要完成的步骤
-void RpcChannel::doneCallback(::google::protobuf::Message* response, int64_t id)
+void RpcChannel::doneCallback(::google::protobuf::Message *response, int64_t id)
 {
-  // FIXME: can we move serialization to IO thread?
-  std::unique_ptr<google::protobuf::Message> d(response);
-  okrpc::RpcMessage message;
-  message.set_type(RESPONSE);
-  message.set_id(id);
-  message.set_response(response->SerializeAsString()); // FIXME: error check
-  codec_.send(conn_, message);
+    // FIXME: can we move serialization to IO thread?
+    std::unique_ptr<google::protobuf::Message> d(response);
+    okrpc::RpcMessage message;
+    message.set_type(RESPONSE);
+    message.set_id(id);
+    message.set_response(response->SerializeAsString()); // FIXME: error check
+    codec_.send(conn_, message);
 }

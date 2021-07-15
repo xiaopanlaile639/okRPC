@@ -16,7 +16,7 @@ aux_source_directory(. SOURCES)
 #编译成为库文件
 add_library(${PROJECT_NAME} ${SOURCES})
 
-SET( CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11 -O3  -pthread")
+SET( CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++14 -O3  -pthread")
                                                       
 target_include_directories(${PROJECT_NAME}
     PUBLIC 
@@ -28,10 +28,13 @@ target_link_libraries(${PROJECT_NAME}
     muduo_base
     muduo_protobuf_codec
     protobuf
+    rpc_zk_lib
     -lz
+     
 )
 
 
+add_subdirectory(utilities)
 add_subdirectory(proto)
 # add_subdirectory(rpcbench)
 add_subdirectory(server)

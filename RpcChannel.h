@@ -64,7 +64,7 @@ namespace okrpc
 
 
 //fixit: 是否需要继承自google::RpcChannel
-  class RpcChannel :public ::google::protobuf::RpcChannel
+  class RpcChannel //:public ::google::protobuf::RpcChannel
   {
   public:
     typedef std::map<std::string, Service *> ServiceMap;
@@ -91,11 +91,19 @@ namespace okrpc
     }
 
     
-    void CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                  ::google::protobuf::RpcController* controller,
-                  const ::google::protobuf::Message* request,
-                  ::google::protobuf::Message* response,
-                  ::google::protobuf::Closure* done) override;
+    // void CallMethod(const ::google::protobuf::MethodDescriptor* method,
+    //               ::google::protobuf::RpcController* controller,
+    //               const ::google::protobuf::Message* request,
+    //               ::google::protobuf::Message* response,
+    //               ::google::protobuf::Closure* done) override;
+
+    void BeforeConnCallMethod(const ::google::protobuf::MethodDescriptor* method,
+                    ::google::protobuf::RpcController* controller,
+                    const ::google::protobuf::Message* request,
+                    ::google::protobuf::Message* response,
+                    ::google::protobuf::Closure* done) ;
+    
+    void AfterConnCallMethod(const TcpConnectionPtr &conn);
 
     void onDisconnect();
 
@@ -127,6 +135,9 @@ namespace okrpc
     std::map<int64_t, OutstandingCall> outstandings_;
 
     const ServiceMap *services_;
+
+    std::unique_ptr<RpcMessage> pendingReqMsg;      //未发出的消息
+
   };
 
 

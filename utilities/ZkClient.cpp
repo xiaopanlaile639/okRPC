@@ -15,6 +15,14 @@ ZkClient::ZkClient():zhandle(nullptr){
     sem_init(&sem,0,0);
 }
 
+ZkClient::~ZkClient(){
+    
+    if(!zhandle){
+        close();            //关闭连接
+    }
+    
+}
+
 void ZkClient::start(){
     // const char * host = ;
 
@@ -29,6 +37,12 @@ void ZkClient::start(){
 
     printf("connecting zookeeper success.\n");
     
+}
+
+int ZkClient::close(){
+
+    return zookeeper_close(zhandle);
+
 }
 
 void ZkClient::create(const char *path, const char *data, int datalen, int state){
@@ -47,6 +61,8 @@ void ZkClient::create(const char *path, const char *data, int datalen, int state
             exit(-1);
         }
 
+    }else{
+        printf("znode exists. path:%s\n",path);
     }
 
 
