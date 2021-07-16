@@ -1,16 +1,30 @@
 #include "RpcClient.h"
 
 
+RpcClient::RpcClient(muduo::net::EventLoop* loopArg):
+        client(nullptr),
+        zk(new ZkClient()),
+        loop(loopArg),
+        channel_(new okrpc::RpcChannel())
+{
+    zk->start();
+    isConnected = false;
+}
+
+RpcClient::~RpcClient(){
+    zk->close();
+
+}
+
 //通过服务名称获取ZK中的服务地址
 int RpcClient::GetServiceAddr(std::string serviceName, InetAddress &serviceAddr)
 {
 
-    ZkClient zk;
-    zk.start();
-    string path = zk.getRootPath() + "/" + serviceName;
+    string path = zk->getRootPath() + "/" + serviceName;
 
-    string host = zk.get(path.c_str());
+    string host = zk->get(path.c_str());
 
+    printf("get host:%s\n",host.c_str());
     if (host.empty())
     {
         LOG_ERROR << " can't get available server: " << path;
@@ -43,37 +57,45 @@ void RpcClient::CallMethod(const ::google::protobuf::MethodDescriptor *method,
         return;
     }
 
+    if(client == nullptr){
+        
+        client = std::make_unique<TcpClient>(loop,serviceAddr,"tcpClient");
+        //client = new TcpClient(loop, serviceAddr, "tcpClient");
 
-    /////
-    client = new TcpClient(&loop, serviceAddr, "tcpClient");
+        client->setConnectionCallback(
+             std::bind(&RpcClient::onConnection, this, _1));
 
-    client->setConnectionCallback(
-         std::bind(&RpcClient::onConnection, this, _1));
+        client->setMessageCallback(
+            std::bind(&okrpc::RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
 
-    client->setMessageCallback(
-        std::bind(&okrpc::RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
+        channel_->BeforeConnCallMethod(method,controller,request,response,done);
+        connect();
 
+       
+    }else{
+        
+        if(isConnected){
+            //在已经建立连接的情况下调用方法
+            channel_->CallMethodWithConn(method,controller,request,response,done);
+        }else{
+            printf("connection do not established!\n");
+        }
+       
+    }
 
-    channel_->BeforeConnCallMethod(method,controller,request,response,done);
-
-    connect();
-    loop.loop();
-
-
-
-    //codec_.send(conn_, message);
 }
 
 void RpcClient::onConnection(const TcpConnectionPtr& conn)
 {
   if (conn->connected())
   {
+      isConnected = true;       //连接成功
       channel_->setConnection(conn);
       channel_->AfterConnCallMethod(conn);          //发送消息
 
   }
   else
   {
-    loop.quit();
+    loop->quit();
   }
 }

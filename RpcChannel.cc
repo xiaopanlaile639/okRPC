@@ -75,32 +75,6 @@ RpcChannel::~RpcChannel()
     LOG_INFO << "RpcChannel::dtor - " << this;
 }
 
-// //通过服务名称获取ZK中的服务地址
-// int GetServiceAddr(std::string serviceName, InetAddress &serviceAddr)
-// {
-
-//     ZkClient zk;
-//     zk.start();
-//     string path = zk.getRootPath() + "/" + serviceName;
-
-//     string host = zk.get(path.c_str());
-
-//     if (host.empty())
-//     {
-//         LOG_ERROR << " can't get available server: " << path;
-//         return -1;
-//     }
-
-//     int idx = host.find(':');
-//     string ip = host.substr(0, idx);
-//     unsigned short port = atoi(host.substr(idx + 1).c_str();
-    
-//     serviceAddr = InetAddress(ip,port);
-
-//     return 0;
-// }
-
-
 //发送调用方法的消息
 void RpcChannel::AfterConnCallMethod(const TcpConnectionPtr &conn){
     
@@ -108,7 +82,6 @@ void RpcChannel::AfterConnCallMethod(const TcpConnectionPtr &conn){
     if(pendingReqMsg != nullptr){
         codec_.send(conn, *pendingReqMsg);
     }
-    
 }
 
 void RpcChannel::BeforeConnCallMethod(const ::google::protobuf::MethodDescriptor *method,
@@ -126,14 +99,6 @@ void RpcChannel::BeforeConnCallMethod(const ::google::protobuf::MethodDescriptor
     pendingReqMsg->set_method(method->name());
     pendingReqMsg->set_request(request->SerializeAsString()); // FIXME: error check
 
-    //RpcMessage *message = new RpcMessage();
-    // message->set_type(REQUEST);
-    // int64_t id = id_.incrementAndGet();
-    // message->set_id(id);
-    // message->set_service(method->service()->full_name());
-    // message->set_method(method->name());
-    // message->set_request(request->SerializeAsString()); // FIXME: error check
-
     OutstandingCall out = {response, done};
     {
         MutexLockGuard lock(mutex_);
@@ -143,29 +108,29 @@ void RpcChannel::BeforeConnCallMethod(const ::google::protobuf::MethodDescriptor
 
 }
 
-// void RpcChannel::CallMethod(const ::google::protobuf::MethodDescriptor *method,
-//                             google::protobuf::RpcController *controller,
-//                             const ::google::protobuf::Message *request,
-//                             ::google::protobuf::Message *response,
-//                             ::google::protobuf::Closure *done)
-// {
-//     RpcMessage message;
-//     message.set_type(REQUEST);
-//     int64_t id = id_.incrementAndGet();
-//     message.set_id(id);
-//     message.set_service(method->service()->full_name());
-//     message.set_method(method->name());
-//     message.set_request(request->SerializeAsString()); // FIXME: error check
+void RpcChannel::CallMethodWithConn(const ::google::protobuf::MethodDescriptor *method,
+                            google::protobuf::RpcController *controller,
+                            const ::google::protobuf::Message *request,
+                            ::google::protobuf::Message *response,
+                            ::google::protobuf::Closure *done)
+{
+    RpcMessage message;
+    message.set_type(REQUEST);
+    int64_t id = id_.incrementAndGet();
+    message.set_id(id);
+    message.set_service(method->service()->full_name());
+    message.set_method(method->name());
+    message.set_request(request->SerializeAsString()); // FIXME: error check
 
-//     OutstandingCall out = {response, done};
-//     {
-//         MutexLockGuard lock(mutex_);
-//         outstandings_[id] = out;
-//     }
+    OutstandingCall out = {response, done};
+    {
+        MutexLockGuard lock(mutex_);
+        outstandings_[id] = out;
+    }
 
 
-//     codec_.send(conn_, message);
-// }
+    codec_.send(conn_, message);
+}
 
 void RpcChannel::onDisconnect()
 {
@@ -180,12 +145,13 @@ void RpcChannel::onMessage(const TcpConnectionPtr &conn,
     codec_.onMessage(conn, buf, receiveTime);
 }
 
+
+//服务端+客户端
 void RpcChannel::onRpcMessage(const TcpConnectionPtr &conn,
                               const RpcMessagePtr &messagePtr,
                               Timestamp receiveTime)
 {
     assert(conn == conn_);
-    //printf("%s\n", message.DebugString().c_str());
     RpcMessage &message = *messagePtr;
 
     LOG_TRACE << "RpcChannel::onRpcMessage " << message.DebugString();
@@ -257,6 +223,7 @@ void RpcChannel::onRpcMessage(const TcpConnectionPtr &conn,
 }
 
 //rpcMessage中调用此方法，来调用最终的服务函数
+//服务端
 void RpcChannel::callServiceMethod(const RpcMessage &message)
 {
     if (services_)

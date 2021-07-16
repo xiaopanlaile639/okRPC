@@ -32,9 +32,6 @@ RpcServer::RpcServer(EventLoop *loop,
 
     //注册原始服务
     registerService(&metaService_);
-
-
-
 }
 
 

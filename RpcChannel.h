@@ -7,7 +7,8 @@
 #endif
 
 #include <map>
- 
+#include <vector>
+
 #include <muduo/base/Atomic.h>
 #include <muduo/base/Mutex.h>
 
@@ -105,6 +106,13 @@ namespace okrpc
     
     void AfterConnCallMethod(const TcpConnectionPtr &conn);
 
+    void CallMethodWithConn(const ::google::protobuf::MethodDescriptor *method,
+                                google::protobuf::RpcController *controller,
+                                const ::google::protobuf::Message *request,
+                                ::google::protobuf::Message *response,
+                                ::google::protobuf::Closure *done);
+
+
     void onDisconnect();
 
     void onMessage(const TcpConnectionPtr &conn,
@@ -120,6 +128,7 @@ namespace okrpc
     
     //发送完数据之后的回调函数
     void doneCallback(::google::protobuf::Message* response, int64_t id);
+
 
     struct OutstandingCall
     {
@@ -137,7 +146,7 @@ namespace okrpc
     const ServiceMap *services_;
 
     std::unique_ptr<RpcMessage> pendingReqMsg;      //未发出的消息
-
+    std::vector<RpcMessage*> pengingMsg;
   };
 
 

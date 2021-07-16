@@ -28,10 +28,9 @@ using namespace okrpc;
 class RpcClient :public ::google::protobuf::RpcChannel
 {
 public:
-    RpcClient():client(nullptr),channel_(new okrpc::RpcChannel)
-    {
+    RpcClient(muduo::net::EventLoop* loopArg);
 
-    }
+    ~RpcClient();
 
     void connect()
     {
@@ -56,10 +55,14 @@ private:
         ::google::protobuf::Closure *done;
     };
 
-    TcpClient *client;
+    //TcpClient *client;
+    std::unique_ptr<TcpClient> client;
     okrpc::RpcChannelPtr channel_;
-    EventLoop loop;
-    // sudoku::SudokuService::Stub stub_;
+    EventLoop *loop;
+
+    std::unique_ptr<ZkClient> zk;
+    //ZkClient *zk;
+    bool isConnected;           //是否已经和客户端建立连接
 
     //heartBeat::HeartBeatService_Stub heartBeatStub;
 };
