@@ -36,7 +36,6 @@ target_link_libraries(${PROJECT_NAME}
 
 add_subdirectory(utilities)
 add_subdirectory(proto)
-# add_subdirectory(rpcbench)
 add_subdirectory(server)
 add_subdirectory(client)
-
+add_subdirectory(rpcbench)

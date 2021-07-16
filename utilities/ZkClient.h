@@ -31,15 +31,19 @@ public:
     }
 
 
+    //static void global_watcher(zhandle_t *zh, int type, int state,
+                // const char*path, void* watchCtx);
+
     static void global_watcher(zhandle_t *zh, int type, int state,
-                const char*path, void* watchCtx);
+    const char*path, void* watchCtx);
 
     
 
 private:
     zhandle_t *zhandle;
 
-    static sem_t sem;
+    //static sem_t sem;
+    sem_t sem;          //取消静态变量
 
     static std::string rootNodePath;
     

@@ -9,6 +9,13 @@ RpcClient::RpcClient(muduo::net::EventLoop* loopArg):
 {
     zk->start();
     isConnected = false;
+
+    //设置默认的的回调函数
+    setConnectionCallback(std::bind(&RpcClient::onConnection, this, _1));
+    setMessageCallback(std::bind(&okrpc::RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
+
+    printf("test1..................\n");
+
 }
 
 RpcClient::~RpcClient(){
@@ -62,11 +69,9 @@ void RpcClient::CallMethod(const ::google::protobuf::MethodDescriptor *method,
         client = std::make_unique<TcpClient>(loop,serviceAddr,"tcpClient");
         //client = new TcpClient(loop, serviceAddr, "tcpClient");
 
-        client->setConnectionCallback(
-             std::bind(&RpcClient::onConnection, this, _1));
+        client->setConnectionCallback(connectionCallback_);
 
-        client->setMessageCallback(
-            std::bind(&okrpc::RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
+        client->setMessageCallback(messageCallback_);
 
         channel_->BeforeConnCallMethod(method,controller,request,response,done);
         connect();
@@ -83,6 +88,11 @@ void RpcClient::CallMethod(const ::google::protobuf::MethodDescriptor *method,
        
     }
 
+}
+
+
+void RpcClient::setConnection(const TcpConnectionPtr& conn){
+    channel_->setConnection(conn);
 }
 
 void RpcClient::onConnection(const TcpConnectionPtr& conn)

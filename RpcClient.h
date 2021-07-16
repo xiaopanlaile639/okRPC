@@ -34,6 +34,7 @@ public:
 
     void connect()
     {
+        
         client->connect();
     }
 
@@ -44,6 +45,16 @@ public:
                 ::google::protobuf::Closure *done)override;
 
     void onConnection(const TcpConnectionPtr& conn);
+
+    void setConnectionCallback(ConnectionCallback cb)
+    { connectionCallback_ = std::move(cb); }
+
+
+    void setMessageCallback(MessageCallback cb)
+    { messageCallback_ = std::move(cb); }
+
+    void setConnection(const TcpConnectionPtr& conn);
+
 private:
     
     //通过服务名称获取ZK中的服务地址
@@ -54,6 +65,9 @@ private:
         ::google::protobuf::Message *response;
         ::google::protobuf::Closure *done;
     };
+
+    ConnectionCallback connectionCallback_;
+    MessageCallback messageCallback_;
 
     //TcpClient *client;
     std::unique_ptr<TcpClient> client;

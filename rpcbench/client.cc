@@ -11,47 +11,55 @@
 
 #include "../RpcChannel.h"
 #include "../proto/echo.pb.h"
+#include "../RpcClient.h"
 
 using namespace muduo;
 using namespace muduo::net;
 
 using namespace okrpc;
 
-static const int kRequests = 50000;
+static const int kRequests = 100;
 
-class RpcClient
+class EchoClient
 {
 public:
-  RpcClient(EventLoop *loop,
+  EchoClient(EventLoop *loop,
             const InetAddress &serverAddr,
             CountDownLatch *allConnected,
             CountDownLatch *allFinished)
       : // loop_(loop),
-        client_(loop, serverAddr, "RpcClient"),
-        channel_(new RpcChannel),
-        stub_(get_pointer(channel_)),
+        //client_(loop, serverAddr, "RpcClient"),
+        rpcClient(new RpcClient(loop)),
+        stub_(get_pointer(rpcClient)),
         allConnected_(allConnected),
         allFinished_(allFinished),
         count_(0)
   {
-    client_.setConnectionCallback(
-        std::bind(&RpcClient::onConnection, this, _1));
-    client_.setMessageCallback(
-        std::bind(&RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
+        //设置新的回调函数
+        //rpcClient->setConnectionCallback(std::bind(&EchoClient::onConnection, this, _1));
+        //rpcClient->setMessageCallback(std::bind(&RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
+    // client_.setConnectionCallback(
+    // //     std::bind(&EchoClient::onConnection, this, _1));
+    // client_.setMessageCallback(
+    //     std::bind(&RpcChannel::onMessage, get_pointer(channel_), _1, _2, _3));
     // client_.enableRetry();
   }
 
   void connect()
   {
-    client_.connect();
+    //client_.connect();
+    rpcClient->connect();
+
+    printf("test2..................\n");
   }
 
   void sendRequest()
   {
+    printf("send request....");
     echo::EchoRequest request;
     request.set_payload("001010");
     echo::EchoResponse *response = new echo::EchoResponse;
-    stub_.Echo(NULL, &request, response, NewCallback(this, &RpcClient::replied, response));
+    stub_.Echo(NULL, &request, response, NewCallback(this, &EchoClient::replied, response));
   }
 
 private:
@@ -61,14 +69,16 @@ private:
     {
       //channel_.reset(new RpcChannel(conn));
       conn->setTcpNoDelay(true);
-      channel_->setConnection(conn);
-      allConnected_->countDown();
+      rpcClient->setConnection(conn);
+    //   allConnected_->countDown();
     }
   }
 
   void replied(echo::EchoResponse *resp)
   {
-    // LOG_INFO << "replied:\n" << resp->DebugString();
+    //LOG_INFO << "replied:\n" << resp->DebugString();
+    //printf("finish %d\n",count_);
+
     // loop_->quit();
     ++count_;
     if (count_ < kRequests)
@@ -83,8 +93,9 @@ private:
   }
 
   // EventLoop* loop_;
-  TcpClient client_;
-  RpcChannelPtr channel_;
+  //TcpClient client_;
+  //RpcChannelPtr channel_;
+  std::unique_ptr<RpcClient> rpcClient;  
   echo::EchoService::Stub stub_;
   CountDownLatch *allConnected_;
   CountDownLatch *allFinished_;
@@ -117,17 +128,24 @@ int main(int argc, char *argv[])
     EventLoopThreadPool pool(&loop, "rpcbench-client");
     pool.setThreadNum(nThreads);
     pool.start();
-    InetAddress serverAddr(argv[1], 8888);
+    InetAddress serverAddr(argv[1], 9981);
 
     Timestamp start(Timestamp::now());
 
-    std::vector<std::unique_ptr<RpcClient>> clients;
+    printf("new clients....\n");
+
+    std::vector<std::unique_ptr<EchoClient>> clients;
     for (int i = 0; i < nClients; ++i)
     {
-      clients.emplace_back(new RpcClient(pool.getNextLoop(), serverAddr, &allConnected, &allFinished));
-      clients.back()->connect();
+      clients.emplace_back(new EchoClient(pool.getNextLoop(), serverAddr, &allConnected, &allFinished));
+      //clients.back()->connect();
+
+      printf("finish %d client\n",i+1);
     }
-    allConnected.wait();
+
+    //printf("wait for connection established...\n");
+
+   // allConnected.wait();
 
     //Timestamp start(Timestamp::now());
     LOG_INFO << "all connected";

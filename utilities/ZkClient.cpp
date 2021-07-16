@@ -5,14 +5,17 @@
 
 #include"ZkClient.h"
 
-sem_t ZkClient::sem;
+// sem_t ZkClient::sem;
 //std::string ZkClient::rootNodePath = "/RpcService";
 std::string ZkClient::rootNodePath = "/test";
 const char * host = "127.0.0.1:2181";
 const int ZK_TIMEOUT = 30000;
 
 ZkClient::ZkClient():zhandle(nullptr){
+    
     sem_init(&sem,0,0);
+
+
 }
 
 ZkClient::~ZkClient(){
@@ -26,7 +29,9 @@ ZkClient::~ZkClient(){
 void ZkClient::start(){
     // const char * host = ;
 
-    zhandle = zookeeper_init(host,global_watcher,ZK_TIMEOUT,nullptr,nullptr,0);
+    //zhandle = zookeeper_init(host,global_watcher,ZK_TIMEOUT,nullptr,nullptr,0);
+    //fixit: 多线程问题，在sem_wait之前，先执行了global_watcher
+    zhandle = zookeeper_init(host,global_watcher,ZK_TIMEOUT,nullptr,(void*)&(sem),0);
 
     if(!zhandle){
         printf("connecting zookeeper error!\n");
@@ -105,6 +110,7 @@ void ZkClient::setRootPath(std::string path)
 	rootNodePath = path;
 }
 
+//使用回调函数传参的方式
 void ZkClient::global_watcher(zhandle_t*zh, int type, int state, const char*path,void *wacherCtx){
 
     printf("watch type: %d\n",type);
@@ -113,7 +119,9 @@ void ZkClient::global_watcher(zhandle_t*zh, int type, int state, const char*path
 
     if(type == ZOO_SESSION_EVENT){
         if(state == ZOO_CONNECTED_STATE){
-            sem_post(&sem);         //通知调用线程
+            sem_t *sem = (sem_t*)wacherCtx;
+            sem_post(sem);
+            //sem_post(&sem);         //通知调用线程
         }else if(state == ZOO_EXPIRED_SESSION_STATE){       //超时
             printf("time out! \n");
         }
