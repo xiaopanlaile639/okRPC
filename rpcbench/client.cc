@@ -81,12 +81,10 @@ private:
 
     // loop_->quit();
     ++count_;
-    if (count_ < kRequests)
-    {
+    if (count_ < kRequests){
       sendRequest();
     }
-    else
-    {
+    else{
       LOG_INFO << "RpcClient " << this << " finished";
       allFinished_->countDown();
     }
